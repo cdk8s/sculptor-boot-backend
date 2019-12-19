@@ -1,0 +1,134 @@
+
+#=================================================================================
+# 容器相关设置
+server:
+  port: ${SERVER_PORT:9091}
+  servlet:
+    context-path: /sculptor-boot-backend
+  tomcat:
+    max-connections: 10000
+    max-threads: 200
+    min-spare-threads: 200
+
+
+
+debug: true
+logging:
+  config: classpath:logback/logback-dev.xml
+#=================================================================================
+# spring 组件相关设置
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  autoconfigure:
+    exclude:
+      - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+        # 如果为 true 表示支持远程访问
+        web-allow-others: false
+  datasource:
+    platform: h2
+    schema:
+      - classpath:h2db/schema.sql
+    data: classpath:h2db/data.sql
+    sql-script-encoding: utf-8
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;DATABASE_TO_UPPER=FALSE
+    username: sa
+    password: 123456
+    hikari:
+      # 连接超时时间（毫秒）
+      connection-timeout: 30000
+      # 连接池最大连接数量
+      maximum-pool-size: 100
+      # 连接池最小连接数量（一般是推荐 minimum-idle 和 maximum-pool-size 一样省去变动时候的性能开销）
+      minimum-idle: 100
+      # 连接存活时间，单位毫秒：180000 = 30 分钟
+      max-lifetime: 1800000
+      connection-test-query: 'SELECT 1'
+      # 连接池名称，主要用于显示在日志记录和 JMX 管理控制台中
+      pool-name: myHikariPoolName
+  redis:
+    database: ${SPRING_REDIS_DATABASE:1}
+    port: ${SPRING_REDIS_PORT:6379}
+    host: ${SPRING_REDIS_HOST:redis.cdk8s.com}
+    password: ${SPRING_REDIS_PASSWORD:123456}
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: -1
+        max-idle: -1
+        min-idle: 200
+        max-wait: 2000ms
+    redisson:
+      config: classpath:redisson/redisson-single.yml
+
+# actuator
+management:
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:19091}
+
+#=================================================================================
+# 其他辅助框架相关配置
+
+
+
+#=================================================================================
+# 自定义参数相关配置
+tkey:
+  sso:
+    oauth:
+      error-uri-msg: "See the full API docs at https://github.com/cdk8s"
+      # 用于 token 前缀，表名是哪个节点服务生成的 token
+      node-number: ${TKEY_NODE_NUMBER:10}
+      tgc-cookie-secure: false
+      remember-me-max-time-to-live-in-seconds: 604800
+      code-max-time-to-live-in-seconds: 120
+      access-token-max-time-to-live-in-seconds: 43200
+      refresh-token-max-time-to-live-in-seconds: 86400
+      tgc-and-user-info-max-time-to-live-in-seconds: 86400
+      client:
+        client-id: 'test_client_id_1'
+        client-secret: 'test_client_secret_1'
+        tkey-server-uri: 'http://sculptor.cdk8s.com:9091/sculptor-boot-backend'
+        client-logout-redirect-uri: 'http://sculptor.cdk8s.com:${server.port}${server.servlet.context-path}'
+        # 由前端来决定登录后的 code 回调地址
+        # 当该参数设置为 true 的时候，拦截器发现未认证，会返回 JSON 提示，而不帮客户端直接重定向。
+        # 用在前后端完全分离（域名完全不一致），不用 cookie 和 session 的情况下
+        # 本项目是完全前后端分离，所以这里必须设置为 true
+        enable-code-callback-to-front: true
+        # 如果上面的 enable-code-callback-to-front=true，则下面该回调地址不会被调用
+        client-code-callback-uri: 'http://sculptor.cdk8s.com:${server.port}${server.servlet.context-path}/codeCallback'
+
+
+
+custom:
+  properties:
+    init:
+      swagger-enabled: true
+      start-test-data-init-enabled: true
+      start-db-health-enabled: true
+      start-redis-health-enabled: true
+      start-http-health-enabled: true
+      start-remove-old-all-cache-enabled: true
+      start-remove-old-biz-cache-enabled: true
+      biz-cache-names:
+        - 'RelRoleUserService'
+        - 'RelPermissionRoleService'
+        - 'SysPermissionService'
+    oauth:
+      client:
+        token-max-time-to-live-in-seconds: 86400
+        # 是否开启认证拦截，默认是 true 开启（只用于测试）
+
+
+
+#=================================================================================

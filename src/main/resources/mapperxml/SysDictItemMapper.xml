@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysDictItemMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysDictItem">
+		<id column="id" property="id"/>
+
+		<result column="dict_id" property="dictId"/>
+		<result column="dict_code" property="dictCode"/>
+		<result column="item_name" property="itemName"/>
+		<result column="item_code" property="itemCode"/>
+		<result column="item_value" property="itemValue"/>
+		<result column="dict_value_type_enum" property="dictValueTypeEnum"/>
+		<result column="ranking" property="ranking"/>
+		<result column="description" property="description"/>
+		<result column="state_enum" property="stateEnum"/>
+		<result column="delete_enum" property="deleteEnum"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="delete_user_id" property="deleteUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		dict_id,
+		dict_code,
+		item_name,
+		item_code,
+		item_value,
+		dict_value_type_enum,
+		ranking,
+		description,
+		state_enum,
+		delete_enum,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where id = #{id}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 0,1
+	</select>
+
+
+	<select id="selectOneByDictId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where dict_id = #{dictId}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 0,1
+	</select>
+
+	<select id="selectByDictId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where dict_id = #{dictId}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByDictIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where dict_id in
+		<foreach item="item" index="index" collection="dictIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByDictCode" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where dict_code = #{dictCode}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByItemCode" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemItemCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where item_code = #{itemCode}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+	<select id="selectByDictCodeList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where dict_code in
+		<foreach item="item" index="index" collection="dictCodeList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByItemCodeList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemItemCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where item_code in
+		<foreach item="item" index="index" collection="itemCodeList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="dictId != null">
+				and dict_id = #{dictId}
+			</if>
+			<if test="dictCode != null and dictCode !=''">
+				and dict_code = #{dictCode}
+			</if>
+			<if test="itemName != null and itemName !=''">
+				and item_name = #{itemName}
+			</if>
+			<if test="itemCode != null and itemCode !=''">
+				and item_code = #{itemCode}
+			</if>
+			<if test="itemValue != null and itemValue !=''">
+				and item_value = #{itemValue}
+			</if>
+			<if test="dictValueTypeEnum != null">
+				and dict_value_type_enum = #{dictValueTypeEnum}
+			</if>
+			<if test="ranking != null">
+				and ranking = #{ranking}
+			</if>
+			<if test="description != null and description !=''">
+				and description = #{description}
+			</if>
+			<if test="stateEnum != null">
+				and state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by ranking asc
+	</select>
+
+	<select id="selectByStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where state_enum = #{stateEnum}
+		order by ranking asc
+	</select>
+
+	<select id="selectByDeleteEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where delete_enum = #{deleteEnum}
+		order by ranking asc
+	</select>
+
+	<select id="selectByDeleteEnumAndStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_dict_item
+		where delete_enum = #{deleteEnum} and state_enum = #{stateEnum}
+		order by ranking asc
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_dict_item(
+
+		id,
+		dict_id,
+		dict_code,
+		item_name,
+		item_code,
+		item_value,
+		dict_value_type_enum,
+		ranking,
+		description,
+		state_enum,
+		delete_enum,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.dictId},
+			#{item.dictCode},
+			#{item.itemName},
+			#{item.itemCode},
+			#{item.itemValue},
+			#{item.dictValueTypeEnum},
+			#{item.ranking},
+			#{item.description},
+			#{item.stateEnum},
+			#{item.deleteEnum},
+			#{item.createDate},
+			#{item.createUserId},
+			#{item.updateDate},
+			#{item.updateUserId},
+			#{item.deleteDate},
+			#{item.deleteUserId}
+		)
+		</foreach>
+	</insert>
+
+	<update id="updateStateEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchUpdateStateMapperBO">
+		update sys_dict_item
+		set
+		state_enum = #{stateEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateDeleteEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		update sys_dict_item
+		set
+		delete_enum = #{deleteEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateDeleteEnumByDictIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysdictitem.SysDictItemDictIdMapperBO">
+		update sys_dict_item
+		set
+		delete_enum = #{deleteEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where dict_id in
+		<foreach item="item" index="index" collection="dictIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

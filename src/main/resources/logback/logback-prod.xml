@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" debug="false">
+
+	<!--============================================================================================================-->
+
+	<property name="APP_NAME" value="sculptor-boot-backend"/>
+	<property name="LOG_FILE_ROOT_PATH" value="/logs/${APP_NAME}"/>
+
+	<property name="DEFAULT_MAX_FILE_SIZE" value="30MB"/>
+	<property name="DEFAULT_MAX_HISTORY" value="30"/>
+	<property name="DEFAULT_ASYNC_QUEUE_SIZE" value="500"/>
+
+
+	<property name="FILE_LOG_PATTERN" value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] [%msg] [%logger:%line] [%thread]%n"/>
+
+	<!--============================================================================================================-->
+
+	<appender name="DEBUG_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE_ROOT_PATH}/${APP_NAME}.debug.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_ROOT_PATH}/archived/${APP_NAME}.debug.%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+			<maxFileSize>${DEFAULT_MAX_FILE_SIZE}</maxFileSize>
+			<maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>DEBUG</level>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
+	</appender>
+
+	<!--=================================-->
+
+	<appender name="INFO_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE_ROOT_PATH}/${APP_NAME}.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_ROOT_PATH}/archived/${APP_NAME}.%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+			<maxFileSize>${DEFAULT_MAX_FILE_SIZE}</maxFileSize>
+			<maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+		</filter>
+	</appender>
+
+	<!--=================================-->
+
+	<appender name="ERROR_OUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE_ROOT_PATH}/${APP_NAME}.error.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>${FILE_LOG_PATTERN}</pattern>
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE_ROOT_PATH}/archived/${APP_NAME}.error.%d{yyyy-MM-dd}_%i.log.gz</fileNamePattern>
+			<maxFileSize>${DEFAULT_MAX_FILE_SIZE}</maxFileSize>
+			<maxHistory>${DEFAULT_MAX_HISTORY}</maxHistory>
+		</rollingPolicy>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+	</appender>
+
+	<!--============================================================================================================-->
+
+	<appender name="ASYNC_DEBUG" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<queueSize>${DEFAULT_ASYNC_QUEUE_SIZE}</queueSize>
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="DEBUG_OUT"/>
+	</appender>
+
+	<appender name="ASYNC_INFO" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<queueSize>${DEFAULT_ASYNC_QUEUE_SIZE}</queueSize>
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="INFO_OUT"/>
+	</appender>
+
+	<appender name="ASYNC_ERROR" class="ch.qos.logback.classic.AsyncAppender">
+		<discardingThreshold>0</discardingThreshold>
+		<queueSize>${DEFAULT_ASYNC_QUEUE_SIZE}</queueSize>
+		<includeCallerData>true</includeCallerData>
+		<appender-ref ref="ERROR_OUT"/>
+	</appender>
+
+	<!--============================================================================================================-->
+
+	<root level="info">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+	</root>
+
+	<logger name="com.cdk8s" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+	</logger>
+
+	<!--业务具体包输出配置 start-->
+	<logger name="com.cdk8s.sculptor.config" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.aop" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.controller" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.service" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<!--用于控制执行的 sql 输出-->
+	<logger name="com.cdk8s.sculptor.mapper" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.strategy" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.interceptor" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.util" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.task" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.audit" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+
+	<logger name="com.cdk8s.sculptor.eventlistener.listener" level="info" additivity="false">
+		<appender-ref ref="ASYNC_ERROR"/>
+		<appender-ref ref="ASYNC_INFO"/>
+		<appender-ref ref="ASYNC_DEBUG"/>
+	</logger>
+	<!--业务具体包输出配置 end-->
+
+	<!--============================================================================================================-->
+
+</configuration>

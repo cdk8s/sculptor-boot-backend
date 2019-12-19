@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.cdk8s.sculptor</groupId>
+	<artifactId>sculptor-boot-backend</artifactId>
+	<version>1.0.0</version>
+	<packaging>jar</packaging>
+
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
+
+	<url>https://github.com/cdk8s</url>
+
+	<developers>
+		<developer>
+			<name>cdk8s</name>
+			<email>cdk8s@qq.com</email>
+		</developer>
+	</developers>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.11.RELEASE</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+
+		<tkey-sso-client-starter-rest.version>1.0.1</tkey-sso-client-starter-rest.version>
+
+		<disruptor.version>3.4.2</disruptor.version>
+		<knife4j-spring-boot-starter.version>1.9.6</knife4j-spring-boot-starter.version>
+		<io.swagger.version>1.5.22</io.swagger.version>
+
+		<druid-spring-boot-starter.version>1.1.21</druid-spring-boot-starter.version>
+		<mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
+		<pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
+		<mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
+
+		<commons-lang3.version>3.8.1</commons-lang3.version>
+		<commons-text.version>1.5</commons-text.version>
+		<commons-collections4.version>4.2</commons-collections4.version>
+		<commons-io.version>2.6</commons-io.version>
+		<commons-codec.version>1.11</commons-codec.version>
+
+		<hutool-all.version>4.5.13</hutool-all.version>
+		<guava.version>27.0.1-jre</guava.version>
+		<okhttp.version>3.12.1</okhttp.version>
+		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+		<mapstruct.version>1.3.0.Final</mapstruct.version>
+		<easy-captcha.version>1.6.2</easy-captcha.version>
+		<ip2region.version>1.7.2</ip2region.version>
+		<jsoup.version>1.12.1</jsoup.version>
+		<redisson-spring-boot-starter.version>3.11.5</redisson-spring-boot-starter.version>
+
+	</properties>
+
+
+	<dependencies>
+
+		<!--业务依赖 start-->
+		<dependency>
+			<groupId>com.cdk8s.tkey</groupId>
+			<artifactId>tkey-sso-client-starter-rest</artifactId>
+			<version>${tkey-sso-client-starter-rest.version}</version>
+		</dependency>
+		<!--业务依赖 end-->
+
+		<!--框架基础依赖 start-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.retry</groupId>
+			<artifactId>spring-retry</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<!--缓存-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+		<!--框架基础依赖 end-->
+
+
+		<!--数据库连接相关 start-->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+		<!--https://search.maven.org/search?q=g:com.alibaba%20AND%20a:druid-spring-boot-starter&core=gav-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid-spring-boot-starter</artifactId>
+			<version>${druid-spring-boot-starter.version}</version>
+		</dependency>
+		<!--数据库连接相关 end-->
+
+		<!--mybatis 相关依赖 start-->
+		<dependency>
+			<!--https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter-->
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>${mybatis-spring-boot-starter.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>${pagehelper-spring-boot-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>mybatis-spring-boot-starter</artifactId>
+					<groupId>org.mybatis.spring.boot</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>tk.mybatis</groupId>
+			<artifactId>mapper-spring-boot-starter</artifactId>
+			<version>${mapper-spring-boot-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>mybatis-spring</artifactId>
+					<groupId>org.mybatis</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>mybatis</artifactId>
+					<groupId>org.mybatis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--mybatis 相关依赖 end-->
+
+		<!--redis start-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+		</dependency>
+		<!--redis end-->
+
+		<!--swagger 其他 UI，已经包含了 swagger 的核心包 start-->
+		<dependency>
+			<groupId>com.github.xiaoymin</groupId>
+			<artifactId>knife4j-spring-boot-starter</artifactId>
+			<version>${knife4j-spring-boot-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>mapstruct</artifactId>
+					<groupId>org.mapstruct</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>guava</artifactId>
+					<groupId>com.google.guava</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>swagger-annotations</artifactId>
+					<groupId>io.swagger</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<artifactId>swagger-annotations</artifactId>
+			<groupId>io.swagger</groupId>
+			<version>${io.swagger.version}</version>
+		</dependency>
+		<!--swagger 其他 UI end-->
+
+		<!--mapstruct 对象属性映射工具 start-->
+		<dependency>
+			<!--
+			use mapstruct-jdk8 for Java 8 or higher
+			官网：http://mapstruct.org/
+			https://search.maven.org/search?q=a:mapstruct
+			-->
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${mapstruct.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
+			<version>${mapstruct.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--mapstruct 对象属性映射工具 end-->
+
+		<!--工具 start-->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>${commons-text.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>${commons-collections4.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons-io.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>${commons-codec.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>${okhttp.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>logging-interceptor</artifactId>
+			<version>${okhttp.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>${hutool-all.version}</version>
+		</dependency>
+
+		<!--验证码-->
+		<dependency>
+			<groupId>com.github.whvcse</groupId>
+			<artifactId>easy-captcha</artifactId>
+			<version>${easy-captcha.version}</version>
+		</dependency>
+
+		<!--hibernate validator 用于校验 html,js 需要-->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
+		</dependency>
+
+		<dependency>
+			<!--分布式锁-->
+			<!--https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter-->
+			<!--https://github.com/redisson/redisson/tree/master/redisson-spring-boot-starter-->
+			<groupId>org.redisson</groupId>
+			<artifactId>redisson-spring-boot-starter</artifactId>
+			<version>${redisson-spring-boot-starter.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>javassist</artifactId>
+					<groupId>org.javassist</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>objenesis</artifactId>
+					<groupId>org.objenesis</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!--ip获取地区信息-->
+		<!--https://gitee.com/lionsoul/ip2region-->
+		<dependency>
+			<groupId>org.lionsoul</groupId>
+			<artifactId>ip2region</artifactId>
+			<version>${ip2region.version}</version>
+		</dependency>
+		<!--工具 end-->
+
+	</dependencies>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<forkMode>once</forkMode>
+					<!-- 解决用 mvn test 控制台中文显示乱码问题 -->
+					<argLine>-Dfile.encoding=UTF-8</argLine>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<repositories>
+		<repository>
+			<id>aliyun-pom-repos</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>aliyun-pom-plugin</id>
+			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

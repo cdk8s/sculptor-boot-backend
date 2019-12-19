@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysUserMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysUser">
+		<id column="id" property="id"/>
+
+		<result column="username" property="username"/>
+		<result column="real_name" property="realName"/>
+		<result column="user_password" property="userPassword"/>
+		<result column="password_salt" property="passwordSalt"/>
+		<result column="user_email" property="userEmail"/>
+		<result column="telephone" property="telephone"/>
+		<result column="mobile_phone" property="mobilePhone"/>
+		<result column="gender_enum" property="genderEnum"/>
+		<result column="register_type_enum" property="registerTypeEnum"/>
+		<result column="register_origin_enum" property="registerOriginEnum"/>
+		<result column="state_enum" property="stateEnum"/>
+		<result column="delete_enum" property="deleteEnum"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="delete_user_id" property="deleteUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		username,
+		real_name,
+		user_password,
+		password_salt,
+		user_email,
+		telephone,
+		mobile_phone,
+		gender_enum,
+		register_type_enum,
+		register_origin_enum,
+		state_enum,
+		delete_enum,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where id = #{id}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 0,1
+	</select>
+
+
+
+	<select id="selectOneByUsername" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserUsernameMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where username = #{username}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 0,1
+	</select>
+
+	<select id="selectByMobilePhone" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserMobilePhoneMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where mobile_phone = #{mobilePhone}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUserEmail" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserUserEmailMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where user_email = #{userEmail}
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by create_date desc
+	</select>
+
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="username != null and username !=''">
+				and username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and real_name = #{realName}
+			</if>
+			<if test="userPassword != null and userPassword !=''">
+				and user_password = #{userPassword}
+			</if>
+			<if test="passwordSalt != null and passwordSalt !=''">
+				and password_salt = #{passwordSalt}
+			</if>
+			<if test="userEmail != null and userEmail !=''">
+				and user_email = #{userEmail}
+			</if>
+			<if test="telephone != null and telephone !=''">
+				and telephone = #{telephone}
+			</if>
+			<if test="mobilePhone != null and mobilePhone !=''">
+				and mobile_phone = #{mobilePhone}
+			</if>
+			<if test="genderEnum != null">
+				and gender_enum = #{genderEnum}
+			</if>
+			<if test="registerTypeEnum != null">
+				and register_type_enum = #{registerTypeEnum}
+			</if>
+			<if test="registerOriginEnum != null">
+				and register_origin_enum = #{registerOriginEnum}
+			</if>
+			<if test="stateEnum != null">
+				and state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBoToDept" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserPageQueryMapperBO">
+		select
+		DISTINCT(su.username),
+		su.id,
+		su.real_name,
+		su.user_password,
+		su.password_salt,
+		su.user_email,
+		su.telephone,
+		su.mobile_phone,
+		su.gender_enum,
+		su.register_type_enum,
+		su.register_origin_enum,
+		su.state_enum,
+		su.delete_enum,
+		su.create_date,
+		su.create_user_id,
+		su.update_date,
+		su.update_user_id,
+		su.delete_date,
+		su.delete_user_id
+		from sys_user as su inner join rel_dept_user as rdu
+		on su.id = rdu.user_id
+
+		<where>
+			<if test="deptId != null">
+				and rdu.dept_id = #{deptId}
+			</if>
+			<if test="deptIdList != null">
+				and rdu.dept_id in
+				<foreach item="item" index="index" collection="deptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="id != null">
+				and su.id = #{id}
+			</if>
+			<if test="username != null and username !=''">
+				and su.username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and su.real_name = #{realName}
+			</if>
+			<if test="userEmail != null and userEmail !=''">
+				and su.user_email = #{userEmail}
+			</if>
+			<if test="telephone != null and telephone !=''">
+				and su.telephone = #{telephone}
+			</if>
+			<if test="mobilePhone != null and mobilePhone !=''">
+				and su.mobile_phone = #{mobilePhone}
+			</if>
+			<if test="genderEnum != null">
+				and su.gender_enum = #{genderEnum}
+			</if>
+			<if test="registerTypeEnum != null">
+				and su.register_type_enum = #{registerTypeEnum}
+			</if>
+			<if test="registerOriginEnum != null">
+				and su.register_origin_enum = #{registerOriginEnum}
+			</if>
+			<if test="stateEnum != null">
+				and su.state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and su.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and su.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and su.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and su.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and su.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and su.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by su.create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBoToRole" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserPageQueryMapperBO">
+		select
+		DISTINCT(su.username),
+		su.id,
+		su.real_name,
+		su.user_password,
+		su.password_salt,
+		su.user_email,
+		su.telephone,
+		su.mobile_phone,
+		su.gender_enum,
+		su.register_type_enum,
+		su.register_origin_enum,
+		su.state_enum,
+		su.delete_enum,
+		su.create_date,
+		su.create_user_id,
+		su.update_date,
+		su.update_user_id,
+		su.delete_date,
+		su.delete_user_id
+		from sys_user as su inner join rel_role_user as rru
+		on su.id = rru.user_id
+
+		<where>
+			<if test="roleId != null">
+				and rru.role_id = #{roleId}
+			</if>
+			<if test="id != null">
+				and su.id = #{id}
+			</if>
+			<if test="username != null and username !=''">
+				and su.username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and su.real_name = #{realName}
+			</if>
+			<if test="userEmail != null and userEmail !=''">
+				and su.user_email = #{userEmail}
+			</if>
+			<if test="telephone != null and telephone !=''">
+				and su.telephone = #{telephone}
+			</if>
+			<if test="mobilePhone != null and mobilePhone !=''">
+				and su.mobile_phone = #{mobilePhone}
+			</if>
+			<if test="genderEnum != null">
+				and su.gender_enum = #{genderEnum}
+			</if>
+			<if test="registerTypeEnum != null">
+				and su.register_type_enum = #{registerTypeEnum}
+			</if>
+			<if test="registerOriginEnum != null">
+				and su.register_origin_enum = #{registerOriginEnum}
+			</if>
+			<if test="stateEnum != null">
+				and su.state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and su.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and su.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and su.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and su.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and su.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and su.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by su.create_date desc
+	</select>
+
+	<select id="selectByStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where state_enum = #{stateEnum}
+		order by create_date desc
+	</select>
+
+	<select id="selectByDeleteEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where delete_enum = #{deleteEnum}
+		order by create_date desc
+	</select>
+
+	<select id="selectByDeleteEnumAndStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user
+		where delete_enum = #{deleteEnum} and state_enum = #{stateEnum}
+		order by create_date desc
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_user(
+
+		id,
+		username,
+		real_name,
+		user_password,
+		password_salt,
+		user_email,
+		telephone,
+		mobile_phone,
+		gender_enum,
+		register_type_enum,
+		register_origin_enum,
+		state_enum,
+		delete_enum,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.username},
+			#{item.realName},
+			#{item.userPassword},
+			#{item.passwordSalt},
+			#{item.userEmail},
+			#{item.telephone},
+			#{item.mobilePhone},
+			#{item.genderEnum},
+			#{item.registerTypeEnum},
+			#{item.registerOriginEnum},
+			#{item.stateEnum},
+			#{item.deleteEnum},
+			#{item.createDate},
+			#{item.createUserId},
+			#{item.updateDate},
+			#{item.updateUserId},
+			#{item.deleteDate},
+			#{item.deleteUserId}
+		)
+		</foreach>
+	</insert>
+
+	<update id="updateStateEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchUpdateStateMapperBO">
+		update sys_user
+		set
+		state_enum = #{stateEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateDeleteEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		update sys_user
+		set
+		delete_enum = #{deleteEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>
