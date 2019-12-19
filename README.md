@@ -39,10 +39,8 @@
 ## Gif 效果演示（单表的前后端 CURD 生成）
 
 - 说明：为了减小 Gif 体积进行了加速
-
-![单表生成代码过程](http://img.gitnavi.com/sculptor-boot/sculptor-boot-gen.gif)
-
-![单元测试过程](http://img.gitnavi.com/sculptor-boot/sculptor-boot-junit.gif)
+- [单表生成代码过程](http://img.gitnavi.com/sculptor-boot/sculptor-boot-gen.gif)
+- [单元测试过程](http://img.gitnavi.com/sculptor-boot/sculptor-boot-junit.gif)
 
 #### 演示步骤
 
@@ -75,7 +73,6 @@ mvn gatling:test -Dgatling.simulationClass=test.load.cdk8s.SysDemoPage
 - 因为和 TKey 一样的架构，有部分图直接拿过来用了，这里不累赘了
 - 服务器的部署教程、配置文件大家可以直接到 TKey 项目上拿：`TKey`：[Github](https://github.com/cdk8s/tkey)、[Gitee](https://gitee.com/cdk8s/tkey)
 
-![Grafana 监控大屏](http://img.gitnavi.com/tkey/actuator-prometheus-grafana.gif)
 ![JProfiler 压测变化](http://img.gitnavi.com/tkey/tkey-jprofiler.gif)
 
 - **登录完整过程：** [主图](https://upload-images.jianshu.io/upload_images/19119711-cd483cefb50eb763.gif)、[备图](http://img.gitnavi.com/tkey/tkey-sso-login.gif)
