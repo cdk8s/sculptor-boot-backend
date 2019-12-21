@@ -6,6 +6,7 @@ import com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeeUserIdMapperBO;
 import com.cdk8s.sculptor.pojo.bo.service.bases.BatchDeleteServiceBO;
+import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeBatchDeleteByUserIdServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeCreateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeePageQueryServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeUpdateServiceBO;
@@ -121,8 +122,8 @@ public class SysEmployeeService {
 
 	@Transactional(rollbackFor = Exception.class)
 	@CacheEvict(allEntries = true, beforeInvocation = false)
-	public Integer batchDeleteByUserIdList(List<Long> userIdList) {
-		return sysEmployeeMapper.updateDeleteEnumByUserIdList(new SysEmployeeUserIdMapperBO(userIdList));
+	public Integer batchDeleteByUserIdList(SysEmployeeBatchDeleteByUserIdServiceBO serviceBO) {
+		return sysEmployeeMapper.updateDeleteEnumByUserIdList(sysEmployeeMapStruct.batchDeleteByUserIdServiceBOToMapperBO(serviceBO));
 	}
 
 	// =====================================操作业务 end=====================================

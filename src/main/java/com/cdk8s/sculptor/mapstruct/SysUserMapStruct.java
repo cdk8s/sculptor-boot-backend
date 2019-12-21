@@ -59,7 +59,9 @@ public interface SysUserMapStruct {
 	SysUserUpdateServiceBO updateRequestParamToServiceBO(SysUserUpdateRequestParam source);
 
 	@Mappings({
+			@Mapping(target = "deleteDate", expression = "java(com.cdk8s.sculptor.util.DatetimeUtil.currentEpochMilli())"),
 			@Mapping(target = "deleteUserId", expression = "java(com.cdk8s.sculptor.util.UserInfoContext.getCurrentUserId())"),
+			@Mapping(target = "updateDate", expression = "java(com.cdk8s.sculptor.util.DatetimeUtil.currentEpochMilli())"),
 			@Mapping(target = "updateUserId", expression = "java(com.cdk8s.sculptor.util.UserInfoContext.getCurrentUserId())"),
 	})
 	BatchDeleteServiceBO batchDeleteParamToServiceBO(BatchDeleteRequestParam source);

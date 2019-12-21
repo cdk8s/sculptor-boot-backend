@@ -1,8 +1,10 @@
 package com.cdk8s.sculptor.mapstruct;
 
 import com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO;
+import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeeBatchDeleteByUserIdMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeePageQueryMapperBO;
 import com.cdk8s.sculptor.pojo.bo.service.bases.BatchDeleteServiceBO;
+import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeBatchDeleteByUserIdServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeCreateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeePageQueryServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeUpdateServiceBO;
@@ -82,6 +84,8 @@ public interface SysEmployeeMapStruct {
 	//=================================================================================
 
 	SysEmployeePageQueryMapperBO pageQueryServiceBOToMapperBO(SysEmployeePageQueryServiceBO source);
+
+	SysEmployeeBatchDeleteByUserIdMapperBO batchDeleteByUserIdServiceBOToMapperBO(SysEmployeeBatchDeleteByUserIdServiceBO source);
 
 
 	@Mappings({

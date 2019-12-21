@@ -17,6 +17,7 @@ import com.cdk8s.sculptor.pojo.bo.service.bases.BatchDeleteServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.bases.BatchUpdateStateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.reldeptuser.RelDeptUserCreateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.relroleuser.RelRoleUserCreateServiceBO;
+import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeBatchDeleteByUserIdServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysemployee.SysEmployeeCreateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysuser.SysUserCreateServiceBO;
 import com.cdk8s.sculptor.pojo.bo.service.sysuser.SysUserPageQueryServiceBO;
@@ -268,7 +269,14 @@ public class SysUserService {
 		relDeptUserService.batchDeleteByUserIdList(idList);
 
 		// 同步删除员工信息表
-		sysEmployeeService.batchDeleteByUserIdList(idList);
+		SysEmployeeBatchDeleteByUserIdServiceBO sysEmployeeBatchDeleteByUserIdServiceBO = new SysEmployeeBatchDeleteByUserIdServiceBO();
+		sysEmployeeBatchDeleteByUserIdServiceBO.setUserIdList(idList);
+		sysEmployeeBatchDeleteByUserIdServiceBO.setUpdateDate(serviceBO.getUpdateDate());
+		sysEmployeeBatchDeleteByUserIdServiceBO.setUpdateUserId(serviceBO.getUpdateUserId());
+		sysEmployeeBatchDeleteByUserIdServiceBO.setDeleteDate(serviceBO.getUpdateDate());
+		sysEmployeeBatchDeleteByUserIdServiceBO.setDeleteUserId(serviceBO.getUpdateUserId());
+
+		sysEmployeeService.batchDeleteByUserIdList(sysEmployeeBatchDeleteByUserIdServiceBO);
 
 		return result;
 	}

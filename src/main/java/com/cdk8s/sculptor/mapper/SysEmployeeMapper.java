@@ -5,6 +5,7 @@ import com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO;
+import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeeBatchDeleteByUserIdMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeePageQueryMapperBO;
 import com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeeUserIdMapperBO;
 import com.cdk8s.sculptor.pojo.entity.SysEmployee;
@@ -44,7 +45,7 @@ public interface SysEmployeeMapper extends CustomBaseMapper<SysEmployee> {
 
 	int updateDeleteEnumByIdList(BatchDeleteMapperBO mapperBO);
 
-	int updateDeleteEnumByUserIdList(SysEmployeeUserIdMapperBO mapperBO);
+	int updateDeleteEnumByUserIdList(SysEmployeeBatchDeleteByUserIdMapperBO mapperBO);
 
 
 	// =====================================操作业务 end=====================================
