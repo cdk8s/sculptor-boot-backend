@@ -1,5 +1,7 @@
 package com.cdk8s.sculptor.enums;
 
+import com.cdk8s.sculptor.util.RandomUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +25,11 @@ public enum BooleanEnum implements BasicEnum {
 	@Override
 	public String getDescription() {
 		return description;
+	}
+
+	public static BooleanEnum getRandomEnum() {
+		BooleanEnum[] allEnums = values();
+		return allEnums[RandomUtil.nextInt(0, allEnums.length)];
 	}
 
 	public static BooleanEnum getEnumByCode(Integer code) {
