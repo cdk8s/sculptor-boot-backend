@@ -50,7 +50,7 @@
 		<commons-codec.version>1.11</commons-codec.version>
 
 		<hutool-all.version>4.5.13</hutool-all.version>
-		<guava.version>27.0.1-jre</guava.version>
+		<guava.version>29.0-jre</guava.version>
 		<okhttp.version>3.12.1</okhttp.version>
 		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
 		<mapstruct.version>1.3.0.Final</mapstruct.version>
