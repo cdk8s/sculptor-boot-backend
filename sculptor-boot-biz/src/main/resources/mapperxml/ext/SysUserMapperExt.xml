@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.ext.SysUserMapperExt">
+
+	<!--=====================================查询业务 start=====================================-->
+
+
+
+
+	<select id="selectByPageQueryMapperBoToDept" resultMap="com.cdk8s.sculptor.mapper.SysUserMapper.BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserPageQueryMapperBO">
+		select
+		DISTINCT(su.username),
+		su.id,
+		su.tenant_id,
+		su.real_name,
+		su.user_password,
+		su.password_salt,
+		su.user_email,
+		su.telephone,
+		su.mobile_phone,
+		su.avatar_url,
+		su.gender_enum,
+		su.user_type_enum,
+		su.register_type_enum,
+		su.register_origin_enum,
+		su.state_enum,
+		su.delete_enum,
+		su.create_date,
+		su.create_user_id,
+		su.update_date,
+		su.update_user_id,
+		su.delete_date,
+		su.delete_user_id
+		from sys_user as su inner join rel_dept_user as rdu
+		on su.id = rdu.user_id
+
+		<where>
+			<if test="deptId != null">
+				and rdu.dept_id = #{deptId}
+			</if>
+			<if test="deptIdList != null">
+				and rdu.dept_id in
+				<foreach item="item" index="index" collection="deptIdList" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="id != null">
+				and su.id = #{id}
+			</if>
+			<if test="tenantId != null">
+				and su.tenant_id = #{tenantId}
+			</if>
+			<if test="username != null and username !=''">
+				and su.username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and su.real_name = #{realName}
+			</if>
+			<if test="userEmail != null and userEmail !=''">
+				and su.user_email = #{userEmail}
+			</if>
+			<if test="telephone != null and telephone !=''">
+				and su.telephone = #{telephone}
+			</if>
+			<if test="mobilePhone != null and mobilePhone !=''">
+				and su.mobile_phone = #{mobilePhone}
+			</if>
+			<if test="genderEnum != null">
+				and su.gender_enum = #{genderEnum}
+			</if>
+			<if test="userTypeEnum != null">
+				and su.user_type_enum = #{userTypeEnum}
+			</if>
+			<if test="registerTypeEnum != null">
+				and su.register_type_enum = #{registerTypeEnum}
+			</if>
+			<if test="registerOriginEnum != null">
+				and su.register_origin_enum = #{registerOriginEnum}
+			</if>
+			<if test="stateEnum != null">
+				and su.state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and su.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and su.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and su.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and su.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and su.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and su.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by su.create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBoToRole" resultMap="com.cdk8s.sculptor.mapper.SysUserMapper.BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuser.SysUserPageQueryMapperBO">
+		select
+		DISTINCT(su.username),
+		su.id,
+		su.tenant_id,
+		su.real_name,
+		su.user_password,
+		su.password_salt,
+		su.user_email,
+		su.telephone,
+		su.mobile_phone,
+		su.avatar_url,
+		su.gender_enum,
+		su.user_type_enum,
+		su.register_type_enum,
+		su.register_origin_enum,
+		su.state_enum,
+		su.delete_enum,
+		su.create_date,
+		su.create_user_id,
+		su.update_date,
+		su.update_user_id,
+		su.delete_date,
+		su.delete_user_id
+		from sys_user as su inner join rel_role_user as rru
+		on su.id = rru.user_id
+
+		<where>
+			<if test="roleId != null">
+				and rru.role_id = #{roleId}
+			</if>
+			<if test="id != null">
+				and su.id = #{id}
+			</if>
+			<if test="tenantId != null">
+				and su.tenant_id = #{tenantId}
+			</if>
+			<if test="username != null and username !=''">
+				and su.username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and su.real_name = #{realName}
+			</if>
+			<if test="userEmail != null and userEmail !=''">
+				and su.user_email = #{userEmail}
+			</if>
+			<if test="telephone != null and telephone !=''">
+				and su.telephone = #{telephone}
+			</if>
+			<if test="mobilePhone != null and mobilePhone !=''">
+				and su.mobile_phone = #{mobilePhone}
+			</if>
+			<if test="genderEnum != null">
+				and su.gender_enum = #{genderEnum}
+			</if>
+			<if test="userTypeEnum != null">
+				and su.user_type_enum = #{userTypeEnum}
+			</if>
+			<if test="registerTypeEnum != null">
+				and su.register_type_enum = #{registerTypeEnum}
+			</if>
+			<if test="registerOriginEnum != null">
+				and su.register_origin_enum = #{registerOriginEnum}
+			</if>
+			<if test="stateEnum != null">
+				and su.state_enum = #{stateEnum}
+			</if>
+			<if test="createUserId != null">
+				and su.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and su.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and su.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and su.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and su.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and su.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by su.create_date desc
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

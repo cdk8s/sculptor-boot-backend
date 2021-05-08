@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.ext.SysBigTextMapperExt">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysBigText">
+		<id column="id" property="id"/>
+
+		<result column="text_title" property="textTitle"/>
+		<result column="text_code" property="textCode"/>
+		<result column="text_content" property="textContent"/>
+		<result column="state_enum" property="stateEnum"/>
+		<result column="delete_enum" property="deleteEnum"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="delete_user_id" property="deleteUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List_Ext">
+
+		sbt.id,
+		sbt.text_title,
+		sbt.text_code,
+		sbt.text_content,
+		sbt.state_enum,
+		sbt.delete_enum,
+		sbt.tenant_id,
+		sbt.create_date,
+		sbt.create_user_id,
+		sbt.update_date,
+		sbt.update_user_id,
+		sbt.delete_date,
+		sbt.delete_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectByPageQueryMapperBoExt" resultMap="com.cdk8s.sculptor.mapper.SysBigTextMapper.BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbigtext.SysBigTextPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List_Ext"/>
+		from sys_big_text as sbt
+
+		<where>
+			<if test="id != null">
+				and sbt.id = #{id}
+			</if>
+			<if test="textTitle != null and textTitle !=''">
+				and sbt.text_title = #{textTitle}
+			</if>
+			<if test="textCode != null and textCode !=''">
+				and sbt.text_code = #{textCode}
+			</if>
+			<if test="textContent != null and textContent !=''">
+				and sbt.text_content = #{textContent}
+			</if>
+			<if test="stateEnum != null">
+				and sbt.state_enum = #{stateEnum}
+			</if>
+			<if test="tenantId != null">
+				and sbt.tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and sbt.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and sbt.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and sbt.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and sbt.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and sbt.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and sbt.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by sbt.create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

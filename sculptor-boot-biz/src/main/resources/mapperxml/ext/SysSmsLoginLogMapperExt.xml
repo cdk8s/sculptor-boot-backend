@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.ext.SysSmsLoginLogMapperExt">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysSmsLoginLog">
+		<id column="id" property="id"/>
+
+		<result column="user_id" property="userId"/>
+		<result column="user_mobile_phone" property="userMobilePhone"/>
+		<result column="verification_code" property="verificationCode"/>
+		<result column="sms_provider_type_enum" property="smsProviderTypeEnum"/>
+		<result column="bool_service_state_enum" property="boolServiceStateEnum"/>
+		<result column="message_content" property="messageContent"/>
+		<result column="bool_use_enum" property="boolUseEnum"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List_Ext">
+
+		ssll.id,
+		ssll.user_id,
+		ssll.user_mobile_phone,
+		ssll.verification_code,
+		ssll.sms_provider_type_enum,
+		ssll.bool_service_state_enum,
+		ssll.message_content,
+		ssll.bool_use_enum,
+		ssll.tenant_id,
+		ssll.create_date,
+		ssll.create_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectByPageQueryMapperBoExt" resultMap="com.cdk8s.sculptor.mapper.SysSmsLoginLogMapper.BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List_Ext"/>
+		from sys_sms_login_log as ssll
+
+		<where>
+			<if test="id != null">
+				and ssll.id = #{id}
+			</if>
+			<if test="userId != null">
+				and ssll.user_id = #{userId}
+			</if>
+			<if test="userMobilePhone != null and userMobilePhone !=''">
+				and ssll.user_mobile_phone = #{userMobilePhone}
+			</if>
+			<if test="verificationCode != null and verificationCode !=''">
+				and ssll.verification_code = #{verificationCode}
+			</if>
+			<if test="smsProviderTypeEnum != null">
+				and ssll.sms_provider_type_enum = #{smsProviderTypeEnum}
+			</if>
+			<if test="boolServiceStateEnum != null">
+				and ssll.bool_service_state_enum = #{boolServiceStateEnum}
+			</if>
+			<if test="messageContent != null and messageContent !=''">
+				and ssll.message_content = #{messageContent}
+			</if>
+			<if test="boolUseEnum != null">
+				and ssll.bool_use_enum = #{boolUseEnum}
+			</if>
+			<if test="tenantId != null">
+				and ssll.tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and ssll.create_user_id = #{createUserId}
+			</if>
+			<if test="createDateStartDate != null">
+				and ssll.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and ssll.create_date &lt;= #{createDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by ssll.create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

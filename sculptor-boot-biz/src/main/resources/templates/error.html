@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>ERROR 页面</title>
+  <meta http-equiv=Content-Type content="text/html; charset=utf-8">
+  <link rel="shortcut icon" href="../static/favicon.ico" th:href="@{/favicon.ico}">
+  <link rel="stylesheet" href="./css/error.css" th:href="@{/css/error.css}">
+</head>
+<body>
+<section class=mod-page-body>
+  <div class="mod-page-main wordwrap clearfix">
+    <div class=x-page-container>
+      <div class="mod-notfound grid-98">
+        <P style="font-size: 70px;">ERROR</P>
+        <P style="font-size: 20px;" th:text="${requestPath}"></P>
+        <P style="font-size: 20px;" th:text="${requestQueryString}"></P>
+        <P style="font-size: 20px;" th:text="${timestamp}"></P>
+        <P style="font-size: 10px;" th:text="${errorMsg}"></P>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>

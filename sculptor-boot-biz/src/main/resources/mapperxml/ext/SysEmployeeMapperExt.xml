@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.ext.SysEmployeeMapperExt">
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectByPageQueryMapperBoToUser" resultMap="com.cdk8s.sculptor.mapper.SysEmployeeMapper.BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysemployee.SysEmployeePageQueryMapperBO">
+		select
+		se.id,
+		se.user_id,
+		se.work_card_id,
+		se.job_position,
+		se.delete_enum,
+		se.create_date,
+		se.create_user_id,
+		se.update_date,
+		se.update_user_id,
+		se.delete_date,
+		se.delete_user_id,
+		su.username,
+		su.real_name
+
+		from sys_employee as se inner join sys_user as su
+		on se.user_id = su.id
+
+		<where>
+			<if test="username != null and username !=''">
+				and su.username = #{username}
+			</if>
+			<if test="realName != null and realName !=''">
+				and su.real_name = #{realName}
+			</if>
+			<if test="id != null">
+				and se.id = #{id}
+			</if>
+			<if test="userId != null">
+				and se.user_id = #{userId}
+			</if>
+			<if test="workCardId != null and workCardId !=''">
+				and se.work_card_id = #{workCardId}
+			</if>
+			<if test="jobPosition != null and jobPosition !=''">
+				and se.job_position = #{jobPosition}
+			</if>
+			<if test="tenantId != null">
+				and se.tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and se.create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and se.delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and se.create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and se.create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and se.update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and se.update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		order by se.create_date desc
+	</select>
+
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysJobLogMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysJobLog">
+		<id column="id" property="id"/>
+
+		<result column="job_id" property="jobId"/>
+		<result column="job_name" property="jobName"/>
+		<result column="job_group" property="jobGroup"/>
+		<result column="invoke_target" property="invokeTarget"/>
+		<result column="cron_expression" property="cronExpression"/>
+		<result column="job_message" property="jobMessage"/>
+		<result column="exception_msg" property="exceptionMsg"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="description" property="description"/>
+		<result column="bool_execute_success_enum" property="boolExecuteSuccessEnum"/>
+		<result column="job_start_date" property="jobStartDate"/>
+		<result column="job_end_date" property="jobEndDate"/>
+		<result column="execute_time" property="executeTime"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		job_id,
+		job_name,
+		job_group,
+		invoke_target,
+		cron_expression,
+		job_message,
+		exception_msg,
+		tenant_id,
+		description,
+		bool_execute_success_enum,
+		job_start_date,
+		job_end_date,
+		execute_time,
+		create_date,
+		create_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+
+	<select id="selectOneByJobId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where job_id = #{jobId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByJobId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where job_id = #{jobId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByJobIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where job_id in
+		<foreach item="item" index="index" collection="jobIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByJobName" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobNameMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where job_name = #{jobName}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+	<select id="selectByJobNameList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobNameMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where job_name in
+		<foreach item="item" index="index" collection="jobNameList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_job_log
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="jobId != null">
+				and job_id = #{jobId}
+			</if>
+			<if test="jobName != null and jobName !=''">
+				and job_name = #{jobName}
+			</if>
+			<if test="jobGroup != null and jobGroup !=''">
+				and job_group = #{jobGroup}
+			</if>
+			<if test="invokeTarget != null and invokeTarget !=''">
+				and invoke_target = #{invokeTarget}
+			</if>
+			<if test="cronExpression != null and cronExpression !=''">
+				and cron_expression = #{cronExpression}
+			</if>
+			<if test="jobMessage != null and jobMessage !=''">
+				and job_message = #{jobMessage}
+			</if>
+			<if test="exceptionMsg != null and exceptionMsg !=''">
+				and exception_msg = #{exceptionMsg}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="description != null and description !=''">
+				and description = #{description}
+			</if>
+			<if test="boolExecuteSuccessEnum != null">
+				and bool_execute_success_enum = #{boolExecuteSuccessEnum}
+			</if>
+			<if test="jobStartDate != null">
+				and job_start_date = #{jobStartDate}
+			</if>
+			<if test="jobEndDate != null">
+				and job_end_date = #{jobEndDate}
+			</if>
+			<if test="executeTime != null">
+				and execute_time = #{executeTime}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="jobStartDateStartDate != null">
+				and job_start_date &gt;= #{jobStartDateStartDate}
+			</if>
+			<if test="jobStartDateEndDate != null">
+				and job_start_date &lt;= #{jobStartDateEndDate}
+			</if>
+			<if test="jobEndDateStartDate != null">
+				and job_end_date &gt;= #{jobEndDateStartDate}
+			</if>
+			<if test="jobEndDateEndDate != null">
+				and job_end_date &lt;= #{jobEndDateEndDate}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_job_log(
+
+		id,
+		job_id,
+		job_name,
+		job_group,
+		invoke_target,
+		cron_expression,
+		job_message,
+		exception_msg,
+		tenant_id,
+		description,
+		bool_execute_success_enum,
+		job_start_date,
+		job_end_date,
+		execute_time,
+		create_date,
+		create_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.jobId},
+			#{item.jobName},
+			#{item.jobGroup},
+			#{item.invokeTarget},
+			#{item.cronExpression},
+			#{item.jobMessage},
+			#{item.exceptionMsg},
+			#{item.tenantId},
+			#{item.description},
+			#{item.boolExecuteSuccessEnum},
+			#{item.jobStartDate},
+			#{item.jobEndDate},
+			#{item.executeTime},
+			#{item.createDate},
+			#{item.createUserId}
+		)
+		</foreach>
+	</insert>
+
+
+	<delete id="deleteByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		DELETE FROM sys_job_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+	<delete id="deleteByJobIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysjoblog.SysJobLogJobIdListToDeleteMapperBO">
+		DELETE FROM sys_job_log
+		where job_id in
+		<foreach item="item" index="index" collection="jobIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

@@ -1,0 +1,9 @@
+User-Agent: *
+Allow: /
+Disallow: /api
+Disallow: /static
+Disallow: /admin
+Disallow: /open
+Disallow: /multiapi
+Disallow: /web
+Sitemap: /sitemap.xml

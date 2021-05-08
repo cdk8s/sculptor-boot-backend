@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.cdk8s.sculptor</groupId>
+    <artifactId>sculptor-boot-backend</artifactId>
+    <version>2.1.90-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sculptor-boot-starter-weixin</artifactId>
+  <packaging>jar</packaging>
+
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId}</description>
+
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-util</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-enum</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-redis</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-okhttp</artifactId>
+    </dependency>
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-tio</artifactId>-->
+    <!--</dependency>-->
+
+    <!--解析 xml-->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+    </dependency>
+
+  </dependencies>
+
+
+</project>

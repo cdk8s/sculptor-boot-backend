@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysBannerMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysBanner">
+		<id column="id" property="id"/>
+
+		<result column="banner_title" property="bannerTitle"/>
+		<result column="banner_description" property="bannerDescription"/>
+		<result column="banner_code" property="bannerCode"/>
+		<result column="cover_pc_image_url" property="coverPcImageUrl"/>
+		<result column="cover_h5_image_url" property="coverH5ImageUrl"/>
+		<result column="banner_stand_date" property="bannerStandDate"/>
+		<result column="banner_jump_type_enum" property="bannerJumpTypeEnum"/>
+		<result column="jump_h5_url" property="jumpH5Url"/>
+		<result column="jump_pc_url" property="jumpPcUrl"/>
+		<result column="jump_type_code" property="jumpTypeCode"/>
+		<result column="jump_object_id" property="jumpObjectId"/>
+		<result column="ranking" property="ranking"/>
+		<result column="delete_enum" property="deleteEnum"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="delete_user_id" property="deleteUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		banner_title,
+		banner_description,
+		banner_code,
+		cover_pc_image_url,
+		cover_h5_image_url,
+		banner_stand_date,
+		banner_jump_type_enum,
+		jump_h5_url,
+		jump_pc_url,
+		jump_type_code,
+		jump_object_id,
+		ranking,
+		delete_enum,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByBannerTitleWhereLike" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerBannerTitleLikeQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where banner_title LIKE CONCAT('%',#{bannerTitle},'%')
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+	</select>
+
+
+	<select id="selectOneByJumpObjectId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerJumpObjectIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where jump_object_id = #{jumpObjectId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByJumpObjectId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerJumpObjectIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where jump_object_id = #{jumpObjectId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByJumpObjectIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerJumpObjectIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where jump_object_id in
+		<foreach item="item" index="index" collection="jumpObjectIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByJumpTypeCode" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerJumpTypeCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where jump_type_code = #{jumpTypeCode}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByBannerCode" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerBannerCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where banner_code = #{bannerCode}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+	<select id="selectByBannerCodeList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerBannerCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where banner_code in
+		<foreach item="item" index="index" collection="bannerCodeList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="bannerTitle != null and bannerTitle !=''">
+				and banner_title = #{bannerTitle}
+			</if>
+			<if test="bannerDescription != null and bannerDescription !=''">
+				and banner_description = #{bannerDescription}
+			</if>
+			<if test="bannerCode != null and bannerCode !=''">
+				and banner_code = #{bannerCode}
+			</if>
+			<if test="coverPcImageUrl != null and coverPcImageUrl !=''">
+				and cover_pc_image_url = #{coverPcImageUrl}
+			</if>
+			<if test="coverH5ImageUrl != null and coverH5ImageUrl !=''">
+				and cover_h5_image_url = #{coverH5ImageUrl}
+			</if>
+			<if test="bannerStandDate != null">
+				and banner_stand_date = #{bannerStandDate}
+			</if>
+			<if test="bannerJumpTypeEnum != null">
+				and banner_jump_type_enum = #{bannerJumpTypeEnum}
+			</if>
+			<if test="jumpH5Url != null and jumpH5Url !=''">
+				and jump_h5_url = #{jumpH5Url}
+			</if>
+			<if test="jumpPcUrl != null and jumpPcUrl !=''">
+				and jump_pc_url = #{jumpPcUrl}
+			</if>
+			<if test="jumpTypeCode != null and jumpTypeCode !=''">
+				and jump_type_code = #{jumpTypeCode}
+			</if>
+			<if test="jumpObjectId != null">
+				and jump_object_id = #{jumpObjectId}
+			</if>
+			<if test="ranking != null">
+				and ranking = #{ranking}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and delete_enum = #{deleteEnum}
+			</if>
+			<if test="bannerStandDateStartDate != null">
+				and banner_stand_date &gt;= #{bannerStandDateStartDate}
+			</if>
+			<if test="bannerStandDateEndDate != null">
+				and banner_stand_date &lt;= #{bannerStandDateEndDate}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by ranking asc
+			</otherwise>
+		</choose>
+	</select>
+
+
+	<select id="selectByDeleteEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_banner
+		where delete_enum = #{deleteEnum}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by ranking asc
+	</select>
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_banner(
+
+		id,
+		banner_title,
+		banner_description,
+		banner_code,
+		cover_pc_image_url,
+		cover_h5_image_url,
+		banner_stand_date,
+		banner_jump_type_enum,
+		jump_h5_url,
+		jump_pc_url,
+		jump_type_code,
+		jump_object_id,
+		ranking,
+		delete_enum,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.bannerTitle},
+			#{item.bannerDescription},
+			#{item.bannerCode},
+			#{item.coverPcImageUrl},
+			#{item.coverH5ImageUrl},
+			#{item.bannerStandDate},
+			#{item.bannerJumpTypeEnum},
+			#{item.jumpH5Url},
+			#{item.jumpPcUrl},
+			#{item.jumpTypeCode},
+			#{item.jumpObjectId},
+			#{item.ranking},
+			#{item.deleteEnum},
+			#{item.tenantId},
+			#{item.createDate},
+			#{item.createUserId},
+			#{item.updateDate},
+			#{item.updateUserId},
+			#{item.deleteDate},
+			#{item.deleteUserId}
+		)
+		</foreach>
+	</insert>
+
+
+	<update id="updateDeleteEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		update sys_banner
+		set
+		delete_enum = #{deleteEnum},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</update>
+
+	<update id="updateDeleteEnumByJumpObjectIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysbanner.SysBannerJumpObjectIdListToDeleteMapperBO">
+		update sys_banner
+		set
+		delete_enum = #{deleteEnum},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where jump_object_id in
+		<foreach item="item" index="index" collection="jumpObjectIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</update>
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

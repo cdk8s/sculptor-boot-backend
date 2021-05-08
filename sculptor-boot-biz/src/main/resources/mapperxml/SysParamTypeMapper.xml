@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysParamTypeMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysParamType">
+		<id column="id" property="id"/>
+
+		<result column="type_name" property="typeName"/>
+		<result column="type_code" property="typeCode"/>
+		<result column="ranking" property="ranking"/>
+		<result column="description" property="description"/>
+		<result column="state_enum" property="stateEnum"/>
+		<result column="delete_enum" property="deleteEnum"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+		<result column="delete_date" property="deleteDate"/>
+		<result column="delete_user_id" property="deleteUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		type_name,
+		type_code,
+		ranking,
+		description,
+		state_enum,
+		delete_enum,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		limit 1
+	</select>
+
+
+
+	<select id="selectByTypeCode" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysparamtype.SysParamTypeTypeCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where type_code = #{typeCode}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+	<select id="selectByTypeCodeList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysparamtype.SysParamTypeTypeCodeMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where type_code in
+		<foreach item="item" index="index" collection="typeCodeList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		<if test="stateEnum != null">
+			and state_enum = #{stateEnum}
+		</if>
+		<if test="deleteEnum != null">
+			and delete_enum = #{deleteEnum}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysparamtype.SysParamTypePageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="typeName != null and typeName !=''">
+				and type_name = #{typeName}
+			</if>
+			<if test="typeCode != null and typeCode !=''">
+				and type_code = #{typeCode}
+			</if>
+			<if test="ranking != null">
+				and ranking = #{ranking}
+			</if>
+			<if test="description != null and description !=''">
+				and description = #{description}
+			</if>
+			<if test="stateEnum != null">
+				and state_enum = #{stateEnum}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="deleteEnum != null">
+				and delete_enum = #{deleteEnum}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by ranking asc
+			</otherwise>
+		</choose>
+	</select>
+
+	<select id="selectByStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where state_enum = #{stateEnum}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByDeleteEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where delete_enum = #{deleteEnum}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by ranking asc
+	</select>
+
+	<select id="selectByDeleteEnumAndStateEnum" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BaseQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_param_type
+		where delete_enum = #{deleteEnum} and state_enum = #{stateEnum}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by ranking asc
+	</select>
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_param_type(
+
+		id,
+		type_name,
+		type_code,
+		ranking,
+		description,
+		state_enum,
+		delete_enum,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id,
+		delete_date,
+		delete_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.typeName},
+			#{item.typeCode},
+			#{item.ranking},
+			#{item.description},
+			#{item.stateEnum},
+			#{item.deleteEnum},
+			#{item.tenantId},
+			#{item.createDate},
+			#{item.createUserId},
+			#{item.updateDate},
+			#{item.updateUserId},
+			#{item.deleteDate},
+			#{item.deleteUserId}
+		)
+		</foreach>
+	</insert>
+
+	<update id="updateStateEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchUpdateStateMapperBO">
+		update sys_param_type
+		set
+		state_enum = #{stateEnum},
+		update_date = #{updateDate},
+		update_user_id = #{updateUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</update>
+
+	<update id="updateDeleteEnumByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		update sys_param_type
+		set
+		delete_enum = #{deleteEnum},
+		delete_date = #{deleteDate},
+		delete_user_id = #{deleteUserId}
+
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</update>
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

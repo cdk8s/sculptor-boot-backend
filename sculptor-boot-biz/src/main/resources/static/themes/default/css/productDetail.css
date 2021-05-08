@@ -1,0 +1,133 @@
+.product-main {
+}
+
+.product-main .row {
+  box-shadow: 0 0 10px #eee;
+  border-radius: 4px;
+}
+
+.panel {
+  margin-bottom: 0;
+}
+
+.product-main .panel-body {
+  padding: 30px;
+  border-radius: 5px;
+}
+
+.met-editor {
+  margin-top: 30px;
+}
+
+.relic {
+  width: 100%;
+  padding: 35px 20px 20px 20px
+}
+
+
+#renderCanvas {
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+#canvasLoading {
+  position: absolute;
+  color: #dddddd;
+  background: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+#canvasLoading div {
+  transform: translate(-50%, -50%);
+  position: relative;
+  top: 50%;
+  left: 50%;
+  width: 200px;
+  z-index: 11;
+}
+
+#loadingBarContainer {
+  position: relative;
+  width: 100%;
+  display: block;
+  height: 4px;
+  border-radius: 4px;
+  background: #555555;
+}
+
+#loadingBar {
+  position: absolute;
+  top: 0;
+  display: block;
+  background: #1caad9;
+  height: 4px;
+  border-radius: 4px;
+  width: 0%;
+}
+
+.md-content {
+  color: #232323;
+  background: #fff;
+  position: relative;
+  border-radius: 3px;
+  margin: 0 auto;
+  width: 100%;
+  height: 400px;
+}
+
+.fullScreenStyle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 9999;
+}
+
+.close-btn {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.relic-container {
+  box-shadow: 0 0 10px #eee;
+  border-radius: 5px;
+}
+
+.nav-item a {
+  color: #545455;
+}
+
+.nav-tabs > li.active > a {
+  color: #c5a47e;
+  font-weight: 600;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  color: #c5a47e;
+  font-weight: 600;
+}
+
+.product-detail-title {
+  margin: 0;
+  padding-bottom: 15px;
+  font-size: 22px;
+  color: #c5a47e;
+}
+
+.fullScreenBtn {
+  margin: 0 auto;
+  text-decoration: none;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+  display: block
+}

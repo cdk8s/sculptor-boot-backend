@@ -1,0 +1,187 @@
+
+#=================================================================================
+# 容器相关设置
+server:
+  port: ${SERVER_PORT:9091}
+  servlet:
+    context-path: /sculptor-boot-backend
+  tomcat:
+    max-connections: 100
+    max-threads: 50
+    min-spare-threads: 50
+
+
+
+debug: true
+logging:
+  config: classpath:logback/logback-dev.xml
+#=================================================================================
+# spring 组件相关设置
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  autoconfigure:
+    exclude:
+      - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  datasource:
+    platform: mysql
+    sql-script-encoding: utf-8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://mysql.cdk8s.com:3306/cdk8s_sculptor_boot?useSSL=false&allowPublicKeyRetrieval=true&autoReconnect=true&allowMultiQueries=true&rewriteBatchedStatements=true&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&character_set_client=utf8mb4&character_set_connection=utf8mb4&character_set_database=utf8mb4&character_set_results=utf8mb4&character_set_server=utf8mb4&character_set_system=utf8&character_set_filesystem=binary&collation_connection=utf8mb4_unicode_520_ci&collation_database=utf8mb4_unicode_520_ci&collation_server=utf8mb4_unicode_520_ci
+    username: ${SPRING_MYSQL_USERNAME:root}
+    password: ${SPRING_MYSQL_PASSWORD:ENC(nb4s8pxj3dujoCjSS+aUkr5iS0giOKgy)}
+    hikari:
+      # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      connection-timeout: 30000
+      # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      max-lifetime: 1800000
+      # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+      idle-timeout: 600000
+      # 连接池最大连接数量
+      maximum-pool-size: 20
+      # 连接池最小连接数量（一般是推荐 minimum-idle 和 maximum-pool-size 一样省去变动时候的性能开销）
+      minimum-idle: 20
+      connection-test-query: 'SELECT 1'
+      # 连接池名称，主要用于显示在日志记录和 JMX 管理控制台中
+      pool-name: myHikariPoolName
+  redis:
+    database: ${SPRING_REDIS_DATABASE:1}
+    port: ${SPRING_REDIS_PORT:6379}
+    host: ${SPRING_REDIS_HOST:redis.cdk8s.com}
+    password: ${SPRING_REDIS_PASSWORD:123456}
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: -1
+        max-idle: -1
+        min-idle: 20
+        max-wait: 2000ms
+
+# actuator
+management:
+  server:
+    port: ${MANAGEMENT_SERVER_PORT:19091}
+
+#=================================================================================
+# 其他辅助框架相关配置
+pagehelper:
+  helperDialect: mysql
+
+#=================================================================================
+# 自定义参数相关配置
+sculptor:
+  redisson:
+    redis-host: ${spring.redis.host}
+    redis-port: ${spring.redis.port}
+    redis-database: ${spring.redis.database}
+    redis-password: ${spring.redis.password}
+  sms:
+    sms-type-enum: 'aliyun'
+    aliyun-login-sign-name: 'gitnavi'
+    aliyun-access-key-id: 'LTAI4G123456fai162eMH4'
+    aliyun-access-secret: '123456'
+  email:
+    email-type-enum: 'aliyun'
+    aliyun-access-key-id: 'LTAI4G123456fai162eMH4'
+    aliyun-access-secret: '123456'
+    aliyun-send-domain: 'admin@aliyunemail.gitnavi.com'
+    aliyun-default-send-user-name: 'admin'
+  tencent:
+    cos:
+      secret-id: 'AKID60d0123456n0qQmulMn0wyjFpYIm'
+      secret-key: 'NTheLo1yl123456KzNyJPGizzkEsKY'
+      region: 'ap-guangzhou'
+      bucket-name: 'upupmo-13012345651'
+  pay:
+    wxpay:
+      app-id: '123456'
+      app-secret: '123456'
+      mch-id: '123456'
+      partner-key: '123456'
+      callback-url: 'http://judasn.xicp.net/sculptor-boot-backend/api/open/sysCommon/wxpayCallback'
+    alipay:
+      app-id: '2016102700772081'
+      private-key: 'MIIEvQIBADANBgkqhk123456LlYdib6QD1wNiR/4zQLFa6vuP+noR0NCEsuEURqp2bpYJtwbCcXdJPpPChyQeHLJwph8Eyhg6EtVEHCaOknkNc3+dwyqf1NCwXK2+h4JdMkGv+g/4JBQHvyCNplGygkTaouww+Fk+jL5pNTUDnHlz9KFKbJrO7DXCAbfqJJ6ChttcSM064lJuGwgUubaOKUR9X9FLCvdlnRUfkJfy2NnAPXv7N1n33TxMOFfz3fwT889eWGw+ITB+fOcC6fmqbPZbzCC+zOqaAaVQhiDkrEnYhGYmSWOhFCZY5gCyJY7GdXbdH0aMdppKLz1nBGd5dAgMBAAECggEAdRCaupIqOLrIUvR6ULUBynZjJ3V0jD+lfliAaGFz/JrJy0D4XCTaUU0j0IwZBN4zFy/++7t/oW96Vy1Gmu/JQeufGJzMutPAXVYyK6o11r61U4k9FLQEEx07HepzrgM6V3gSYP8dTvVDEFBYSzhFXUU3Pk739fw+LhHIg2lIM8hJmdkbfbcJh+t/WAPZ+OxMf938pxvZ5m2T7NsnmHzF/zgYHBUMl9tr8n1AOsyTXtTyqP2THBvX6pwMB1AACjpcQu9K2A2VnuZUunlvB4Dzv7o+vmQSUZ3oYr7ObMw+LcuWWXkDWoKjFZqdh8YL1M1rEO2tvSo+o3inMxpv/yd/AQKBgQDfdWf7NBUCKRuaQHBNYJUcPvHosBrep82YXOtGaA/XZ/XPPsSidLGw+y+cRuUOp1vXvJu95NHuv7uE5ftTsOckl1Hrs3ScOKcK4mWMZifztIB3vmN/sLBYDLv2bJEWJEx+6QscKgswVgL7uXNZnqNeGx5QYvVkM8WRvsBEVaKOQQKBgQC0Zr6jH/QD9EUvqrJH7aHY5u+i4yl+Vx2aZ247kE1GZii6GuoFryolVUTbPsZwMnIRBcom7cinX94Mh02oniU2WNh6pqs70Re6mBF32VJX+xbP6cztZL/L2vpU6xkYn14nUqBA/Tq0dZJdY68LmNrR0qrvZNDVjxd7iOU4pcGBHQKBgQCUgDCvB0ii2/DFDOfU9EeDsu0OxuHEcF24UJ/mdUd5zlPT+5GvqL9hrzxPremRWHU3pNcXVlaRRIf45OGmF500ev9tFSB8pUWVfSkhKc6JLb5mVXdIJ4K5sRTEyheNUGgpuvOwLtyqra5j3TWkLEHDS2BU6b7MbX9xwQODJinWQQKBgEkhSXCJOHsN36oWEVV1MGHkJAqs+ZocqIR6H0aIFbtPGH1xAaMyQeyGZ3ZVOU4sNO9PoIYtaGTpSPNdOg77pOwmEgOOYuXJukvK73HdKDNANxwrlAY8DEAQUeBwuWiw2hMovIv723tiGeY/zaru2O2r791ByiJ4cjWC5iETmKDFAoGAcF9vU/qFNcgsoifqdC3z7XnUxKLaLEQqWhsYV4WenvcHVJTPvAsbOzO1+i0H9DbV63MGEo9n43FXrtmkHyfB2zovz3uyuHs4uYzD4KQlH8pcOuLTpqlCPeNcRALKc+RJFIQcKGj9WygLk/VZOZYEp3mSGwOkbrrXM1H82Iul/RU='
+      public-key: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AM1234562R2ksxS+pK/d3Eyt2bFkksAzz9lm8kPlLK8ce8SWK8RQwS4QsMOn5w3lBG34u8Fts9mCmLQx65AHGZtMZJp+HsHsq7h7lVF0MWnLLKnu2PNEW9H5HSVeaTHliqFVHGO50vdWZYs9ore/gy6TXze9IBdK16ZupqLD8T6bFTJd8gE+JcuPU4DUwp7VdaCtu2sYBY2tDVEaRSKr0biKhqbrUSXnNHbsvNDvjpPArUpOOFSXP+BGl4Tq/lgP6J3V/wKMvUIGWiGE0gnjuJHGT0g/pBkW8LX3SkSQFl810TXgAcV745ZqBYMDxqJJB70jkKBiu5Bm39TPyu9cwIDAQAB'
+      server-url: 'https://openapi.alipaydev.com/gateway.do'
+      callback-url: 'http://judasn.xicp.net/sculptor-boot-backend/api/open/sysCommon/alipayCallback'
+  weixin:
+    app-id: '123456'
+    app-secret: '123456'
+    mini-program-app-id: 'wx41234566cdb7a6'
+    mini-program-app-secret: '123456'
+    website-app-id: 'wx47c123456db7a6'
+    website-app-secret: '123456'
+    website-redirect-uri: 'https://frontend.upupmo.com/weixin/qrLogin'
+
+
+tkey:
+  sso:
+    oauth:
+      error-uri-msg: "See the full API docs at https://github.com/cdk8s"
+      node-number: ${TKEY_NODE_NUMBER:10}
+      tgc-cookie-secure: false
+      remember-me-max-time-to-live-in-seconds: 604800
+      code-max-time-to-live-in-seconds: 120
+      access-token-max-time-to-live-in-seconds: 43200
+      refresh-token-max-time-to-live-in-seconds: 86400
+      tgc-and-user-info-max-time-to-live-in-seconds: 86400
+      enable-grant-type-list:
+        - "refresh_token"
+        - "authorization_code"
+        - "token"
+        - "password"
+      client:
+        client-id: 'test_client_id_1'
+        client-secret: 'test_client_secret_1'
+        tkey-server-uri: 'http://sculptor.cdk8s.com:${server.port}${server.servlet.context-path}'
+        client-logout-redirect-uri: 'http://sculptor.cdk8s.com:${server.port}${server.servlet.context-path}'
+        # 由前端来决定登录后的 code 回调地址
+        # 当该参数设置为 true 的时候，拦截器发现未认证，会返回 JSON 提示，而不帮客户端直接重定向。
+        # 用在前后端完全分离（域名完全不一致），不用 cookie 和 session 的情况下
+        # 本项目是完全前后端分离，所以这里必须设置为 true
+        enable-code-callback-to-front: true
+        # 如果上面的 enable-code-callback-to-front=true，则下面该回调地址不会被调用
+        client-code-callback-uri: 'http://sculptor.cdk8s.com:${server.port}${server.servlet.context-path}/codeCallback'
+
+
+custom:
+  properties:
+    upload:
+      upload-oss-type-enum: local
+      # 不配置默认是用户 home 目录下的 sculptor-boot-backend-upload-dir/upload 下
+      # local-upload-storage-path: '/Users/youmeek/my_temp_dir'
+      # 最后面不能以斜杠结尾
+      local-upload-file-url-relative-path: '/upload/file'
+      upyun-bucket-name: 'gitnavi-img'
+      upyun-username: 'hehpsy'
+      upyun-password: '6ZZP8P123456YmAmU6iGaNx'
+      aliyun-oss-endpoint-protocol: 'http://'
+      aliyun-oss-endpoint: 'oss-cn-beijing.aliyuncs.com'
+      aliyun-oss-sts-endpoint: 'sts.aliyuncs.com'
+      aliyun-oss-sts-role-arn: 'acs:ram::195123456990113:role/oss-sts-front'
+      aliyun-oss-bucket-name: 'oss-sts-front'
+      aliyun-oss-region: 'oss-cn-beijing'
+      aliyun-oss-endpoint-url: '${custom.properties.upload.aliyun-oss-endpoint-protocol}${custom.properties.upload.aliyun-oss-endpoint}'
+      aliyun-oss-bucket-url: '${custom.properties.upload.aliyun-oss-endpoint-protocol}${custom.properties.upload.aliyun-oss-bucket-name}.${custom.properties.upload.aliyun-oss-endpoint}'
+      aliyun-oss-access-key-id: 'LTAI41234566Yu116jqyL'
+      aliyun-oss-access-key-secret: 'cXOO212345656fbUt91P'
+      aliyun-oss-callback-url: 'http://judasn.xicp.net/sculptor-boot-backend/thirdApi/callback/aliyunOssCallback'
+    init:
+      start-test-data-init-enabled: true
+      start-db-health-enabled: true
+      start-redis-health-enabled: true
+      start-http-health-enabled: false
+      start-mongo-health-enabled: false
+      start-remove-old-all-cache-enabled: true
+    oauth:
+      client:
+        token-max-time-to-live-in-seconds: 86400
+        # 是否开启认证拦截，默认是 true 开启（只用于测试）
+
+
+
+#=================================================================================

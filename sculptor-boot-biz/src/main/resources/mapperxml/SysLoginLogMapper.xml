@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysLoginLogMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysLoginLog">
+		<id column="id" property="id"/>
+
+		<result column="user_id" property="userId"/>
+		<result column="username" property="username"/>
+		<result column="client_id" property="clientId"/>
+		<result column="token" property="token"/>
+		<result column="message" property="message"/>
+		<result column="login_date" property="loginDate"/>
+		<result column="logout_date" property="logoutDate"/>
+		<result column="request_url" property="requestUrl"/>
+		<result column="bool_login_success_enum" property="boolLoginSuccessEnum"/>
+		<result column="bool_now_online_enum" property="boolNowOnlineEnum"/>
+		<result column="offline_type_enum" property="offlineTypeEnum"/>
+		<result column="exception_msg" property="exceptionMsg"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="ip_address" property="ipAddress"/>
+		<result column="ip_region" property="ipRegion"/>
+		<result column="ip_region_country" property="ipRegionCountry"/>
+		<result column="ip_region_province" property="ipRegionProvince"/>
+		<result column="ip_region_city" property="ipRegionCity"/>
+		<result column="ip_region_isp" property="ipRegionIsp"/>
+		<result column="user_agent" property="userAgent"/>
+		<result column="device_name" property="deviceName"/>
+		<result column="os_name" property="osName"/>
+		<result column="browser_name" property="browserName"/>
+		<result column="browser_locale" property="browserLocale"/>
+		<result column="bool_new_user_enum" property="boolNewUserEnum"/>
+		<result column="login_origin_enum" property="loginOriginEnum"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		user_id,
+		username,
+		client_id,
+		token,
+		message,
+		login_date,
+		logout_date,
+		request_url,
+		bool_login_success_enum,
+		bool_now_online_enum,
+		offline_type_enum,
+		exception_msg,
+		tenant_id,
+		ip_address,
+		ip_region,
+		ip_region_country,
+		ip_region_province,
+		ip_region_city,
+		ip_region_isp,
+		user_agent,
+		device_name,
+		os_name,
+		browser_name,
+		browser_locale,
+		bool_new_user_enum,
+		login_origin_enum,
+		create_date,
+		create_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+
+	<select id="selectOneByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUserIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByToken" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogTokenMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where token = #{token}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUsername" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUsernameMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where username = #{username}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+	<select id="selectByUsernameList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUsernameMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where username in
+		<foreach item="item" index="index" collection="usernameList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_login_log
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			<if test="username != null and username !=''">
+				and username = #{username}
+			</if>
+			<if test="clientId != null and clientId !=''">
+				and client_id = #{clientId}
+			</if>
+			<if test="token != null and token !=''">
+				and token = #{token}
+			</if>
+			<if test="message != null and message !=''">
+				and message = #{message}
+			</if>
+			<if test="loginDate != null">
+				and login_date = #{loginDate}
+			</if>
+			<if test="logoutDate != null">
+				and logout_date = #{logoutDate}
+			</if>
+			<if test="requestUrl != null and requestUrl !=''">
+				and request_url = #{requestUrl}
+			</if>
+			<if test="boolLoginSuccessEnum != null">
+				and bool_login_success_enum = #{boolLoginSuccessEnum}
+			</if>
+			<if test="boolNowOnlineEnum != null">
+				and bool_now_online_enum = #{boolNowOnlineEnum}
+			</if>
+			<if test="offlineTypeEnum != null">
+				and offline_type_enum = #{offlineTypeEnum}
+			</if>
+			<if test="exceptionMsg != null and exceptionMsg !=''">
+				and exception_msg = #{exceptionMsg}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="ipAddress != null and ipAddress !=''">
+				and ip_address = #{ipAddress}
+			</if>
+			<if test="ipRegion != null and ipRegion !=''">
+				and ip_region = #{ipRegion}
+			</if>
+			<if test="ipRegionCountry != null and ipRegionCountry !=''">
+				and ip_region_country = #{ipRegionCountry}
+			</if>
+			<if test="ipRegionProvince != null and ipRegionProvince !=''">
+				and ip_region_province = #{ipRegionProvince}
+			</if>
+			<if test="ipRegionCity != null and ipRegionCity !=''">
+				and ip_region_city = #{ipRegionCity}
+			</if>
+			<if test="ipRegionIsp != null and ipRegionIsp !=''">
+				and ip_region_isp = #{ipRegionIsp}
+			</if>
+			<if test="userAgent != null and userAgent !=''">
+				and user_agent = #{userAgent}
+			</if>
+			<if test="deviceName != null and deviceName !=''">
+				and device_name = #{deviceName}
+			</if>
+			<if test="osName != null and osName !=''">
+				and os_name = #{osName}
+			</if>
+			<if test="browserName != null and browserName !=''">
+				and browser_name = #{browserName}
+			</if>
+			<if test="browserLocale != null and browserLocale !=''">
+				and browser_locale = #{browserLocale}
+			</if>
+			<if test="boolNewUserEnum != null">
+				and bool_new_user_enum = #{boolNewUserEnum}
+			</if>
+			<if test="loginOriginEnum != null">
+				and login_origin_enum = #{loginOriginEnum}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="loginDateStartDate != null">
+				and login_date &gt;= #{loginDateStartDate}
+			</if>
+			<if test="loginDateEndDate != null">
+				and login_date &lt;= #{loginDateEndDate}
+			</if>
+			<if test="logoutDateStartDate != null">
+				and logout_date &gt;= #{logoutDateStartDate}
+			</if>
+			<if test="logoutDateEndDate != null">
+				and logout_date &lt;= #{logoutDateEndDate}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_login_log(
+
+		id,
+		user_id,
+		username,
+		client_id,
+		token,
+		message,
+		login_date,
+		logout_date,
+		request_url,
+		bool_login_success_enum,
+		bool_now_online_enum,
+		offline_type_enum,
+		exception_msg,
+		tenant_id,
+		ip_address,
+		ip_region,
+		ip_region_country,
+		ip_region_province,
+		ip_region_city,
+		ip_region_isp,
+		user_agent,
+		device_name,
+		os_name,
+		browser_name,
+		browser_locale,
+		bool_new_user_enum,
+		login_origin_enum,
+		create_date,
+		create_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.userId},
+			#{item.username},
+			#{item.clientId},
+			#{item.token},
+			#{item.message},
+			#{item.loginDate},
+			#{item.logoutDate},
+			#{item.requestUrl},
+			#{item.boolLoginSuccessEnum},
+			#{item.boolNowOnlineEnum},
+			#{item.offlineTypeEnum},
+			#{item.exceptionMsg},
+			#{item.tenantId},
+			#{item.ipAddress},
+			#{item.ipRegion},
+			#{item.ipRegionCountry},
+			#{item.ipRegionProvince},
+			#{item.ipRegionCity},
+			#{item.ipRegionIsp},
+			#{item.userAgent},
+			#{item.deviceName},
+			#{item.osName},
+			#{item.browserName},
+			#{item.browserLocale},
+			#{item.boolNewUserEnum},
+			#{item.loginOriginEnum},
+			#{item.createDate},
+			#{item.createUserId}
+		)
+		</foreach>
+	</insert>
+
+
+	<delete id="deleteByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		DELETE FROM sys_login_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+	<delete id="deleteByUserIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysloginlog.SysLoginLogUserIdListToDeleteMapperBO">
+		DELETE FROM sys_login_log
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

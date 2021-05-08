@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.cdk8s.sculptor</groupId>
+    <artifactId>sculptor-boot-backend</artifactId>
+    <version>2.1.90-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>sculptor-boot-biz</artifactId>
+  <packaging>jar</packaging>
+
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId}</description>
+
+  <dependencies>
+
+    <!--业务依赖 start-->
+    <dependency>
+      <groupId>com.cdk8s.tkey</groupId>
+      <artifactId>tkey-sso-client-starter-rest</artifactId>
+    </dependency>
+    <!--业务依赖 end-->
+
+    <!--自身依赖 start-->
+    <!--自定义 starter start-->
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-pojo</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-excel</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-sms</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-email</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-redisson</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-weixin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-pay</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-starter-tencent-cos</artifactId>
+    </dependency>
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-webmagic</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-lucene</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-elasticsearch</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-rabbitmq</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--	<groupId>com.cdk8s.sculptor</groupId>-->
+    <!--	<artifactId>sculptor-boot-starter-cas</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--	<groupId>com.cdk8s.sculptor</groupId>-->
+    <!--	<artifactId>sculptor-boot-starter-mongo</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-drools</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-ureport</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-threadpool</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-jwt</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-pdf</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-qr</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-yunxin</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-jpush</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-tio</artifactId>-->
+    <!--</dependency>-->
+
+    <!--<dependency>-->
+    <!--  <groupId>com.cdk8s.sculptor</groupId>-->
+    <!--  <artifactId>sculptor-boot-starter-vod</artifactId>-->
+    <!--</dependency>-->
+
+    <!--自定义 starter end-->
+
+    <!--自定义 common start-->
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-ip</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-redis</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-validator</artifactId>
+      <exclusions>
+        <exclusion>
+          <!--webmagic 冲突问题-->
+          <artifactId>jsoup</artifactId>
+          <groupId>org.jsoup</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-spring</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-util</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-okhttp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-enum</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-exception</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-properties</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.cdk8s.sculptor</groupId>
+      <artifactId>sculptor-boot-common-constant</artifactId>
+    </dependency>
+    <!--自定义 common end-->
+    <!--自身依赖 end-->
+
+
+    <!--框架基础依赖 start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>android-json</artifactId>
+          <groupId>com.vaadin.external.google</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.retry</groupId>
+      <artifactId>spring-retry</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!--缓存-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+
+    <!--用于输出一些模板文件-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-freemarker</artifactId>
+    </dependency>
+    <!--框架基础依赖 end-->
+
+
+    <!--数据库连接相关 start-->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
+    <!--https://search.maven.org/search?q=g:com.alibaba%20AND%20a:druid-spring-boot-starter&core=gav-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid-spring-boot-starter</artifactId>
+    </dependency>
+    <!--数据库连接相关 end-->
+
+    <!--mybatis 相关依赖 start-->
+    <dependency>
+      <!--https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter-->
+      <groupId>org.mybatis.spring.boot</groupId>
+      <artifactId>mybatis-spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.github.pagehelper</groupId>
+      <artifactId>pagehelper-spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>tk.mybatis</groupId>
+      <artifactId>mapper-spring-boot-starter</artifactId>
+    </dependency>
+    <!--mybatis 相关依赖 end-->
+
+    <!--redis start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-pool2</artifactId>
+    </dependency>
+    <!--redis end-->
+
+    <!--mapstruct 对象属性映射工具 start-->
+    <dependency>
+      <!--
+      use mapstruct-jdk8 for Java 8 or higher
+      官网：http://mapstruct.org/
+      https://search.maven.org/search?q=a:mapstruct
+      -->
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-processor</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <!--mapstruct 对象属性映射工具 end-->
+
+    <!--https://search.maven.org/search?q=jasypt-spring-boot-starter-->
+    <dependency>
+      <groupId>com.github.ulisesbocchio</groupId>
+      <artifactId>jasypt-spring-boot-starter</artifactId>
+    </dependency>
+
+    <!--工具 start-->
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-text</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-collections4</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>commons-codec</groupId>
+      <artifactId>commons-codec</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>okhttp</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.squareup.okhttp3</groupId>
+      <artifactId>logging-interceptor</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+    </dependency>
+
+    <!--验证码-->
+    <dependency>
+      <groupId>com.github.whvcse</groupId>
+      <artifactId>easy-captcha</artifactId>
+    </dependency>
+
+    <!--hibernate validator 用于校验 html,js 需要-->
+    <!--webmagic 不能用太新的 jsoup 版本，不然会报一个 java.lang.NoClassDefFoundError: org/jsoup/helper/StringUtil-->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+    </dependency>
+
+    <!--ip获取地区信息-->
+    <!--https://gitee.com/lionsoul/ip2region-->
+    <dependency>
+      <groupId>org.lionsoul</groupId>
+      <artifactId>ip2region</artifactId>
+    </dependency>
+
+    <!--又拍云官网：https://github.com/upyun/java-sdk-->
+    <dependency>
+      <groupId>com.upyun</groupId>
+      <artifactId>java-sdk</artifactId>
+    </dependency>
+
+    <!--阿里云 oss-->
+    <dependency>
+      <groupId>com.aliyun.oss</groupId>
+      <artifactId>aliyun-sdk-oss</artifactId>
+    </dependency>
+
+
+    <!--easyExcel工具 start-->
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>easyexcel</artifactId>
+    </dependency>
+    <dependency>
+      <artifactId>asm</artifactId>
+      <groupId>org.ow2.asm</groupId>
+    </dependency>
+    <!--easyExcel工具 end-->
+
+    <!--解析 xml-->
+    <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+    </dependency>
+
+    <!--quartz start-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-quartz</artifactId>
+    </dependency>
+    <!--quartz end-->
+    <!--工具 end-->
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <finalName>${project.name}</finalName>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

@@ -1,15 +1,7 @@
-FROM anapsix/alpine-java:8_server-jre_unlimited
+FROM java:openjdk-8-jre-alpine
 
-MAINTAINER cdk8s cdk8s@qq.com
+WORKDIR /home
 
-VOLUME /tmp
+COPY ./deploy/*.jar /home
 
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-ADD ./target/sculptor-boot-backend-1.0.0.jar /app.jar
-RUN bash -c 'touch /app.jar'
-
-EXPOSE 9091
-EXPOSE 19091
-ENTRYPOINT ["java", "-jar", "-Xms524m", "-Xmx1024m", "-XX:MetaspaceSize=124m", "-XX:MaxMetaspaceSize=224M"  ,"/app.jar"]
+ENTRYPOINT java -jar *.jar ${JAVA_OPTS} --SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE} --SPRING_REDIS_HOST=${SPRING_REDIS_HOST}

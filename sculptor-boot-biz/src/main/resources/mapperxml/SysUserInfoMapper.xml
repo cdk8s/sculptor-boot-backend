@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysUserInfoMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysUserInfo">
+		<id column="id" property="id"/>
+
+		<result column="user_id" property="userId"/>
+		<result column="weixin_openid" property="weixinOpenid"/>
+		<result column="weixin_unionid" property="weixinUnionid"/>
+		<result column="weixin_userinfo" property="weixinUserinfo"/>
+		<result column="id_card" property="idCard"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+		<result column="update_date" property="updateDate"/>
+		<result column="update_user_id" property="updateUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		user_id,
+		weixin_openid,
+		weixin_unionid,
+		weixin_userinfo,
+		id_card,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+
+	<select id="selectOneByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUserIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByWeixinUnionid" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoWeixinUnionidMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where weixin_unionid = #{weixinUnionid}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByWeixinOpenid" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoWeixinOpenidMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where weixin_openid = #{weixinOpenid}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByIdCard" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoIdCardMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where id_card = #{idCard}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+	<select id="selectByWeixinUnionidList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoWeixinUnionidMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where weixin_unionid in
+		<foreach item="item" index="index" collection="weixinUnionidList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByWeixinOpenidList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoWeixinOpenidMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where weixin_openid in
+		<foreach item="item" index="index" collection="weixinOpenidList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByIdCardList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoIdCardMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where id_card in
+		<foreach item="item" index="index" collection="idCardList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_user_info
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			<if test="weixinOpenid != null and weixinOpenid !=''">
+				and weixin_openid = #{weixinOpenid}
+			</if>
+			<if test="weixinUnionid != null and weixinUnionid !=''">
+				and weixin_unionid = #{weixinUnionid}
+			</if>
+			<if test="weixinUserinfo != null and weixinUserinfo !=''">
+				and weixin_userinfo = #{weixinUserinfo}
+			</if>
+			<if test="idCard != null and idCard !=''">
+				and id_card = #{idCard}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+			<if test="updateDateStartDate != null">
+				and update_date &gt;= #{updateDateStartDate}
+			</if>
+			<if test="updateDateEndDate != null">
+				and update_date &lt;= #{updateDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_user_info(
+
+		id,
+		user_id,
+		weixin_openid,
+		weixin_unionid,
+		weixin_userinfo,
+		id_card,
+		tenant_id,
+		create_date,
+		create_user_id,
+		update_date,
+		update_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.userId},
+			#{item.weixinOpenid},
+			#{item.weixinUnionid},
+			#{item.weixinUserinfo},
+			#{item.idCard},
+			#{item.tenantId},
+			#{item.createDate},
+			#{item.createUserId},
+			#{item.updateDate},
+			#{item.updateUserId}
+		)
+		</foreach>
+	</insert>
+
+
+	<delete id="deleteByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		DELETE FROM sys_user_info
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+	<delete id="deleteByUserIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.sysuserinfo.SysUserInfoUserIdListToDeleteMapperBO">
+		DELETE FROM sys_user_info
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

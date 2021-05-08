@@ -1,386 +1,805 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.cdk8s.sculptor</groupId>
-	<artifactId>sculptor-boot-backend</artifactId>
-	<version>1.0.0</version>
-	<packaging>jar</packaging>
+  <groupId>com.cdk8s.sculptor</groupId>
+  <artifactId>sculptor-boot-backend</artifactId>
+  <version>2.1.90-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
-	<name>${project.artifactId}</name>
-	<description>${project.artifactId}</description>
+  <name>${project.artifactId}</name>
+  <description>${project.artifactId}</description>
 
-	<url>https://github.com/cdk8s</url>
+  <url>https://github.com/cdk8s</url>
 
-	<developers>
-		<developer>
-			<name>cdk8s</name>
-			<email>cdk8s@qq.com</email>
-		</developer>
-	</developers>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.11.RELEASE</version>
-		<relativePath/>
-	</parent>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-
-		<tkey-sso-client-starter-rest.version>1.0.1</tkey-sso-client-starter-rest.version>
-
-		<disruptor.version>3.4.2</disruptor.version>
-		<knife4j-spring-boot-starter.version>1.9.6</knife4j-spring-boot-starter.version>
-		<io.swagger.version>1.5.22</io.swagger.version>
-
-		<druid-spring-boot-starter.version>1.1.21</druid-spring-boot-starter.version>
-		<mybatis-spring-boot-starter.version>2.1.1</mybatis-spring-boot-starter.version>
-		<pagehelper-spring-boot-starter.version>1.2.12</pagehelper-spring-boot-starter.version>
-		<mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
-
-		<commons-lang3.version>3.8.1</commons-lang3.version>
-		<commons-text.version>1.5</commons-text.version>
-		<commons-collections4.version>4.2</commons-collections4.version>
-		<commons-io.version>2.6</commons-io.version>
-		<commons-codec.version>1.11</commons-codec.version>
-
-		<hutool-all.version>4.5.13</hutool-all.version>
-		<guava.version>27.0.1-jre</guava.version>
-		<okhttp.version>3.12.1</okhttp.version>
-		<jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-		<mapstruct.version>1.3.0.Final</mapstruct.version>
-		<easy-captcha.version>1.6.2</easy-captcha.version>
-		<ip2region.version>1.7.2</ip2region.version>
-		<jsoup.version>1.12.1</jsoup.version>
-		<redisson-spring-boot-starter.version>3.11.5</redisson-spring-boot-starter.version>
-
-	</properties>
+  <developers>
+    <developer>
+      <name>cdk8s</name>
+      <email>cdk8s@qq.com</email>
+    </developer>
+  </developers>
 
 
-	<dependencies>
+  <modules>
+    <module>sculptor-boot-biz</module>
+    <module>sculptor-boot-pojo</module>
+    <module>sculptor-boot-common</module>
+    <module>sculptor-boot-starter-redisson</module>
+    <module>sculptor-boot-starter-excel</module>
+    <module>sculptor-boot-starter-sms</module>
+    <module>sculptor-boot-starter-email</module>
+    <module>sculptor-boot-starter-weixin</module>
+    <module>sculptor-boot-starter-pay</module>
+    <module>sculptor-boot-starter-qr</module>
+    <module>sculptor-boot-starter-tencent-cos</module>
+  </modules>
 
-		<!--业务依赖 start-->
-		<dependency>
-			<groupId>com.cdk8s.tkey</groupId>
-			<artifactId>tkey-sso-client-starter-rest</artifactId>
-			<version>${tkey-sso-client-starter-rest.version}</version>
-		</dependency>
-		<!--业务依赖 end-->
-
-		<!--框架基础依赖 start-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-thymeleaf</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-aop</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.micrometer</groupId>
-			<artifactId>micrometer-registry-prometheus</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.retry</groupId>
-			<artifactId>spring-retry</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-
-		<!--缓存-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-cache</artifactId>
-		</dependency>
-		<!--框架基础依赖 end-->
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.10.RELEASE</version>
+    <relativePath/>
+  </parent>
 
 
-		<!--数据库连接相关 start-->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-		</dependency>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>1.8</java.version>
 
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
+    <!--依赖 start-->
+    <spring-boot.version>2.2.10.RELEASE</spring-boot.version>
+    <tkey-sso-client-starter-rest.version>1.0.7</tkey-sso-client-starter-rest.version>
+    <lombok.version>1.18.12</lombok.version>
 
-		<!--https://search.maven.org/search?q=g:com.alibaba%20AND%20a:druid-spring-boot-starter&core=gav-->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid-spring-boot-starter</artifactId>
-			<version>${druid-spring-boot-starter.version}</version>
-		</dependency>
-		<!--数据库连接相关 end-->
+    <sculptor-boot.version>2.1.90-SNAPSHOT</sculptor-boot.version>
+    <disruptor.version>3.4.2</disruptor.version>
+    <spring-retry.version>1.2.5.RELEASE</spring-retry.version>
+    <micrometer-registry-prometheus.version>1.3.9</micrometer-registry-prometheus.version>
 
-		<!--mybatis 相关依赖 start-->
-		<dependency>
-			<!--https://search.maven.org/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter-->
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>${mybatis-spring-boot-starter.version}</version>
-		</dependency>
+    <druid-spring-boot-starter.version>1.1.22</druid-spring-boot-starter.version>
+    <mybatis-spring-boot-starter.version>2.1.3</mybatis-spring-boot-starter.version>
+    <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
+    <mapper-spring-boot-starter.version>2.1.5</mapper-spring-boot-starter.version>
+    <redisson-spring-boot-starter.version>3.11.5</redisson-spring-boot-starter.version>
+    <jasypt-spring-boot-starter.version>3.0.2</jasypt-spring-boot-starter.version>
+    <tio-websocket-spring-boot-starter.version>3.6.0.v20200315-RELEASE</tio-websocket-spring-boot-starter.version>
 
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper-spring-boot-starter</artifactId>
-			<version>${pagehelper-spring-boot-starter.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>mybatis-spring-boot-starter</artifactId>
-					<groupId>org.mybatis.spring.boot</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+    <commons-lang3.version>3.8.1</commons-lang3.version>
+    <commons-text.version>1.5</commons-text.version>
+    <commons-collections4.version>4.2</commons-collections4.version>
+    <commons-io.version>2.6</commons-io.version>
+    <commons-codec.version>1.11</commons-codec.version>
+    <commons-pool2.version>2.6.2</commons-pool2.version>
 
-		<dependency>
-			<groupId>tk.mybatis</groupId>
-			<artifactId>mapper-spring-boot-starter</artifactId>
-			<version>${mapper-spring-boot-starter.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>mybatis-spring</artifactId>
-					<groupId>org.mybatis</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>mybatis</artifactId>
-					<groupId>org.mybatis</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!--mybatis 相关依赖 end-->
+    <h2.version>1.4.200</h2.version>
+    <mysql-connector-java.version>8.0.20</mysql-connector-java.version>
+    <postgresql.version>42.2.10</postgresql.version>
+    <hutool-all.version>5.5.8</hutool-all.version>
+    <guava.version>29.0-jre</guava.version>
+    <okhttp.version>3.12.2</okhttp.version>
+    <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
+    <mapstruct.version>1.3.0.Final</mapstruct.version>
+    <easy-captcha.version>1.6.2</easy-captcha.version>
+    <ip2region.version>1.7.2</ip2region.version>
+    <zip4j.version>2.6.2</zip4j.version>
+    <java-jwt.version>3.10.3</java-jwt.version>
+    <jsoup.version>1.12.1</jsoup.version>
+    <jsoup-to-webmagic.version>1.10.3</jsoup-to-webmagic.version>
+    <jedis-to-webmagic.version>2.9.0</jedis-to-webmagic.version>
+    <upyun-java-sdk.version>4.1.4</upyun-java-sdk.version>
+    <xxl-job.version>2.1.2</xxl-job.version>
+    <easyexcel.version>2.1.6</easyexcel.version>
+    <aliyun-sdk-oss.version>3.8.0</aliyun-sdk-oss.version>
+    <aliyun-java-sdk-core.version>4.5.3</aliyun-java-sdk-core.version>
+    <aliyun-java-sdk-vod.version>2.15.10</aliyun-java-sdk-vod.version>
+    <aliyun-java-sdk-dm.version>3.3.1</aliyun-java-sdk-dm.version>
+    <aliyun-java-sdk-kms.version>2.10.1</aliyun-java-sdk-kms.version>
+    <cos_api.version>5.6.36</cos_api.version>
+    <persistence-api.version>1.0</persistence-api.version>
+    <webmagic.version>0.7.4</webmagic.version>
+    <jpush.version>3.4.3</jpush.version>
+    <lucene.version>8.3.0</lucene.version>
+    <elasticsearch.version>7.6.2</elasticsearch.version>
+    <dom4j.version>1.6.1</dom4j.version>
+    <asm.version>5.0.4</asm.version>
+    <xhtmlrenderer.version>9.1.20</xhtmlrenderer.version>
+    <checker-qual.version>3.4.0</checker-qual.version>
+    <fastjson.version>1.2.71</fastjson.version>
+    <bcprov-jdk15on.version>1.62</bcprov-jdk15on.version>
+    <IJPay.version>2.6.3</IJPay.version>
+    <qrext4j.version>1.3.1</qrext4j.version>
+    <zxing.version>3.4.0</zxing.version>
+    <sentry.version>1.7.23</sentry.version>
+    <cas-client-autoconfig-support.version>1.7.0-GA</cas-client-autoconfig-support.version>
+    <drools.version>7.40.0.Final</drools.version>
+    <poi.version>4.1.2</poi.version>
+    <ureport.version>2.2.9</ureport.version>
+    <antlr4-runtime.version>4.8</antlr4-runtime.version>
+    <xmlbeans.version>3.1.0</xmlbeans.version>
+    <commons-logging.version>1.2</commons-logging.version>
+    <error_prone_annotations.version>2.4.0</error_prone_annotations.version>
+    <!--依赖 end-->
 
-		<!--redis start-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
+    <!--插件 start-->
+    <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+    <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+    <!--插件 end-->
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-pool2</artifactId>
-		</dependency>
-		<!--redis end-->
+  </properties>
 
-		<!--swagger 其他 UI，已经包含了 swagger 的核心包 start-->
-		<dependency>
-			<groupId>com.github.xiaoymin</groupId>
-			<artifactId>knife4j-spring-boot-starter</artifactId>
-			<version>${knife4j-spring-boot-starter.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>mapstruct</artifactId>
-					<groupId>org.mapstruct</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>guava</artifactId>
-					<groupId>com.google.guava</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>swagger-annotations</artifactId>
-					<groupId>io.swagger</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<artifactId>swagger-annotations</artifactId>
-			<groupId>io.swagger</groupId>
-			<version>${io.swagger.version}</version>
-		</dependency>
-		<!--swagger 其他 UI end-->
+  <dependencies>
 
-		<!--mapstruct 对象属性映射工具 start-->
-		<dependency>
-			<!--
-			use mapstruct-jdk8 for Java 8 or higher
-			官网：http://mapstruct.org/
-			https://search.maven.org/search?q=a:mapstruct
-			-->
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>${mapstruct.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
-			<version>${mapstruct.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<!--mapstruct 对象属性映射工具 end-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+      <version>${lombok.version}</version>
+    </dependency>
 
-		<!--工具 start-->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>${commons-lang3.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-logging</artifactId>
+      <optional>true</optional>
+      <version>${spring-boot.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>${commons-text.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-autoconfigure</artifactId>
+      <optional>true</optional>
+      <version>${spring-boot.version}</version>
+    </dependency>
 
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-collections4</artifactId>
-			<version>${commons-collections4.version}</version>
-		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+      <version>${spring-boot.version}</version>
+    </dependency>
+  </dependencies>
 
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>${commons-io.version}</version>
-		</dependency>
+  <dependencyManagement>
+    <dependencies>
 
-		<dependency>
-			<groupId>commons-codec</groupId>
-			<artifactId>commons-codec</artifactId>
-			<version>${commons-codec.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
 
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>${okhttp.version}</version>
-		</dependency>
+      <!--自身依赖 start-->
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-pojo</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>logging-interceptor</artifactId>
-			<version>${okhttp.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-email</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>${guava.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-sms</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<dependency>
-			<groupId>cn.hutool</groupId>
-			<artifactId>hutool-all</artifactId>
-			<version>${hutool-all.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-excel</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<!--验证码-->
-		<dependency>
-			<groupId>com.github.whvcse</groupId>
-			<artifactId>easy-captcha</artifactId>
-			<version>${easy-captcha.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-redisson</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<!--hibernate validator 用于校验 html,js 需要-->
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>${jsoup.version}</version>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-weixin</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<dependency>
-			<!--分布式锁-->
-			<!--https://search.maven.org/artifact/org.redisson/redisson-spring-boot-starter-->
-			<!--https://github.com/redisson/redisson/tree/master/redisson-spring-boot-starter-->
-			<groupId>org.redisson</groupId>
-			<artifactId>redisson-spring-boot-starter</artifactId>
-			<version>${redisson-spring-boot-starter.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>javassist</artifactId>
-					<groupId>org.javassist</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>objenesis</artifactId>
-					<groupId>org.objenesis</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-pay</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-		<!--ip获取地区信息-->
-		<!--https://gitee.com/lionsoul/ip2region-->
-		<dependency>
-			<groupId>org.lionsoul</groupId>
-			<artifactId>ip2region</artifactId>
-			<version>${ip2region.version}</version>
-		</dependency>
-		<!--工具 end-->
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-qr</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-	</dependencies>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-starter-tencent-cos</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-redis</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<forkMode>once</forkMode>
-					<!-- 解决用 mvn test 控制台中文显示乱码问题 -->
-					<argLine>-Dfile.encoding=UTF-8</argLine>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-ip</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-spring</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-validator</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-util</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-okhttp</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-enum</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-exception</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-properties</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.cdk8s.sculptor</groupId>
+        <artifactId>sculptor-boot-common-constant</artifactId>
+        <version>${sculptor-boot.version}</version>
+      </dependency>
+      <!--自身依赖 end-->
 
 
-	<repositories>
-		<repository>
-			<id>aliyun-pom-repos</id>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+      <!--业务依赖 start-->
+      <dependency>
+        <groupId>com.cdk8s.tkey</groupId>
+        <artifactId>tkey-sso-client-starter-rest</artifactId>
+        <version>${tkey-sso-client-starter-rest.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>okhttp</artifactId>
+            <groupId>com.squareup.okhttp3</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>logging-interceptor</artifactId>
+            <groupId>com.squareup.okhttp3</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <!--业务依赖 end-->
 
-	<pluginRepositories>
-		<pluginRepository>
-			<id>aliyun-pom-plugin</id>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</pluginRepository>
-	</pluginRepositories>
+
+      <!--框架基础依赖 start-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-logging</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-configuration-processor</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-test</artifactId>
+        <version>${spring-boot.version}</version>
+        <scope>test</scope>
+        <exclusions>
+          <exclusion>
+            <artifactId>android-json</artifactId>
+            <groupId>com.vaadin.external.google</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-aop</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-actuator</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>io.micrometer</groupId>
+        <artifactId>micrometer-registry-prometheus</artifactId>
+        <version>${micrometer-registry-prometheus.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.retry</groupId>
+        <artifactId>spring-retry</artifactId>
+        <version>${spring-retry.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-json</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-cache</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-freemarker</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+      <!--框架基础依赖 end-->
+
+
+      <!--数据库连接相关 start-->
+      <dependency>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>${h2.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql-connector-java.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>${postgresql.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid-spring-boot-starter</artifactId>
+        <version>${druid-spring-boot-starter.version}</version>
+      </dependency>
+      <!--数据库连接相关 end-->
+
+      <!--mybatis 相关依赖 start-->
+      <dependency>
+        <groupId>org.mybatis.spring.boot</groupId>
+        <artifactId>mybatis-spring-boot-starter</artifactId>
+        <version>${mybatis-spring-boot-starter.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper-spring-boot-starter</artifactId>
+        <version>${pagehelper-spring-boot-starter.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <dependency>
+        <groupId>tk.mybatis</groupId>
+        <artifactId>mapper-spring-boot-starter</artifactId>
+        <version>${mapper-spring-boot-starter.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>mybatis-spring</artifactId>
+            <groupId>org.mybatis</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>mybatis</artifactId>
+            <groupId>org.mybatis</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <!--mybatis 相关依赖 end-->
+
+      <!--redis start-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-pool2</artifactId>
+        <version>${commons-pool2.version}</version>
+      </dependency>
+      <!--redis end-->
+
+      <!--mapstruct 对象属性映射工具 start-->
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>${mapstruct.version}</version>
+        <scope>provided</scope>
+      </dependency>
+      <!--mapstruct 对象属性映射工具 end-->
+
+      <dependency>
+        <groupId>com.github.ulisesbocchio</groupId>
+        <artifactId>jasypt-spring-boot-starter</artifactId>
+        <version>${jasypt-spring-boot-starter.version}</version>
+      </dependency>
+
+      <!--工具 start-->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-text</artifactId>
+        <version>${commons-text.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-collections4</artifactId>
+        <version>${commons-collections4.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons-io.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons-codec.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>${okhttp.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>logging-interceptor</artifactId>
+        <version>${okhttp.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool-all.version}</version>
+      </dependency>
+
+      <!--为了解决版本冲突独立配置出来-->
+      <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>${bcprov-jdk15on.version}</version>
+      </dependency>
+
+      <!--验证码-->
+      <dependency>
+        <groupId>com.github.whvcse</groupId>
+        <artifactId>easy-captcha</artifactId>
+        <version>${easy-captcha.version}</version>
+      </dependency>
+
+
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-validation</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+
+      <!--hibernate validator 用于校验 html,js 需要-->
+      <dependency>
+        <groupId>org.jsoup</groupId>
+        <artifactId>jsoup</artifactId>
+        <version>${jsoup.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.redisson</groupId>
+        <artifactId>redisson-spring-boot-starter</artifactId>
+        <version>${redisson-spring-boot-starter.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>javassist</artifactId>
+            <groupId>org.javassist</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>objenesis</artifactId>
+            <groupId>org.objenesis</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--ip获取地区信息-->
+      <!--https://gitee.com/lionsoul/ip2region-->
+      <dependency>
+        <groupId>org.lionsoul</groupId>
+        <artifactId>ip2region</artifactId>
+        <version>${ip2region.version}</version>
+      </dependency>
+
+      <!--又拍云官网：https://github.com/upyun/java-sdk-->
+      <dependency>
+        <groupId>com.upyun</groupId>
+        <artifactId>java-sdk</artifactId>
+        <version>${upyun-java-sdk.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>okhttp</artifactId>
+            <groupId>com.squareup.okhttp3</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--阿里云 oss-->
+      <dependency>
+        <groupId>com.aliyun.oss</groupId>
+        <artifactId>aliyun-sdk-oss</artifactId>
+        <version>${aliyun-sdk-oss.version}</version>
+      </dependency>
+
+      <!--阿里SMS依赖jar-->
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-core</artifactId>
+        <version>${aliyun-java-sdk-core.version}</version>
+      </dependency>
+
+      <!--阿里云邮件-->
+      <dependency>
+        <groupId>com.aliyun</groupId>
+        <artifactId>aliyun-java-sdk-dm</artifactId>
+        <version>${aliyun-java-sdk-dm.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>activation</artifactId>
+            <groupId>javax.activation</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--腾讯云 cos-->
+      <dependency>
+        <groupId>com.qcloud</groupId>
+        <artifactId>cos_api</artifactId>
+        <version>${cos_api.version}</version>
+      </dependency>
+
+      <dependency>
+        <!--用于解决包冲突-->
+        <groupId>org.checkerframework</groupId>
+        <artifactId>checker-qual</artifactId>
+        <version>${checker-qual.version}</version>
+      </dependency>
+
+      <!--easyExcel工具 start-->
+      <dependency>
+        <!--https://search.maven.org/search?q=g:com.alibaba%20AND%20a:easyexcel&core=gav-->
+        <!--https://www.yuque.com/easyexcel/doc/update-->
+        <groupId>com.alibaba</groupId>
+        <artifactId>easyexcel</artifactId>
+        <version>${easyexcel.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-collections4</artifactId>
+            <groupId>org.apache.commons</groupId>
+          </exclusion>
+          <exclusion>
+            <artifactId>asm</artifactId>
+            <groupId>org.ow2.asm</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>org.ow2.asm</groupId>
+        <artifactId>asm</artifactId>
+        <version>${asm.version}</version>
+      </dependency>
+      <!--easyExcel工具 end-->
+
+      <!--解析 xml-->
+      <dependency>
+        <groupId>dom4j</groupId>
+        <artifactId>dom4j</artifactId>
+        <version>${dom4j.version}</version>
+      </dependency>
+
+      <!--quartz start-->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-quartz</artifactId>
+        <version>${spring-boot.version}</version>
+      </dependency>
+      <!--quartz end-->
+
+      <!--IJPay start-->
+      <dependency>
+        <groupId>com.github.javen205</groupId>
+        <artifactId>IJPay-WxPay</artifactId>
+        <version>${IJPay.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.github.javen205</groupId>
+        <artifactId>IJPay-AliPay</artifactId>
+        <version>${IJPay.version}</version>
+      </dependency>
+      <!--IJPay end-->
+
+      <!--二维码工具 start-->
+      <dependency>
+        <groupId>org.iherus</groupId>
+        <artifactId>qrext4j</artifactId>
+        <version>${qrext4j.version}</version>
+      </dependency>
+
+      <!--为了解决版本冲突独立配置出来-->
+      <dependency>
+        <groupId>com.google.zxing</groupId>
+        <artifactId>core</artifactId>
+        <version>${zxing.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.google.zxing</groupId>
+        <artifactId>javase</artifactId>
+        <version>${zxing.version}</version>
+      </dependency>
+      <!--二维码工具 end-->
+
+      <!--entity 需要用到一些注解-->
+      <dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>persistence-api</artifactId>
+        <version>${persistence-api.version}</version>
+      </dependency>
+
+
+    </dependencies>
+  </dependencyManagement>
+
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring-boot.version}</version>
+          <configuration>
+            <finalName>${project.name}</finalName>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${maven-compiler-plugin.version}</version>
+          <configuration>
+            <target>${java.version}</target>
+            <source>${java.version}</source>
+            <encoding>${project.build.sourceEncoding}</encoding>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven-surefire-plugin.version}</version>
+          <configuration>
+            <forkMode>once</forkMode>
+            <skipTests>true</skipTests>
+            <testFailureIgnore>true</testFailureIgnore>
+            <argLine>-Dfile.encoding=UTF-8</argLine>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+
+  <repositories>
+    <repository>
+      <id>aliyun-pom-repos</id>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>aliyun-pom-plugin</id>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
 
 </project>

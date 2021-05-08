@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cdk8s.sculptor</groupId>
+		<artifactId>sculptor-boot-common</artifactId>
+		<version>2.1.90-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sculptor-boot-common-spring</artifactId>
+	<packaging>jar</packaging>
+
+	<description>公共工具</description>
+
+
+	<dependencies>
+		<dependency>
+			<groupId>com.cdk8s.sculptor</groupId>
+			<artifactId>sculptor-boot-common-util</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.cdk8s.sculptor</groupId>
+			<artifactId>sculptor-boot-common-constant</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>

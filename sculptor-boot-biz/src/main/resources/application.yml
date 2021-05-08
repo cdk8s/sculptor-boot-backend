@@ -1,0 +1,75 @@
+
+#=================================================================================
+# 容器相关设置
+
+#=================================================================================
+# spring 组件相关设置
+spring:
+  application:
+    name: sculptor-boot-backend
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  jackson:
+    default-property-inclusion: non_null
+    date-format: 'yyyy-MM-dd HH:mm:ss'
+  thymeleaf:
+    encoding: utf-8
+    prefix: 'classpath:/templates/'
+    suffix: '.html'
+    cache: false
+  aop:
+    proxy-target-class: true
+  freemarker:
+    prefer-file-system-access: false
+
+# actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+  server:
+    servlet:
+      context-path: /sculptor-boot-backend-actuator
+
+
+#=================================================================================
+# 其他辅助框架相关配置
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+    map-underscore-to-camel-case: true
+    use-generated-keys: false
+  mapper-locations:
+    - "mapperxml/ext/*.xml"
+    - "mapperxml/*.xml"
+  type-handlers-package: com.cdk8s.sculptor.handler.typehandler
+mapper:
+  mappers:
+    - com.cdk8s.sculptor.config.CustomBaseMapper
+  notEmpty: false
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+jasypt:
+  encryptor:
+    password: 'thisIsSculptorBootFromCDK8S'
+    algorithm: 'PBEWithMD5AndDES'
+#=================================================================================
+# 自定义参数相关配置
+
+
+custom:
+  properties:
+    init:
+      start-remove-old-biz-cache-enabled: true
+      biz-cache-names:
+        - 'SysPermissionService'
+        - 'SysRoleService'
+        - 'SysUserService'
+        - 'SysParamService'
+
+#=================================================================================

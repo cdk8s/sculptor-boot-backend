@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cdk8s.sculptor.mapper.SysSmsLoginLogMapper">
+
+	<resultMap id="BaseResultMap" type="com.cdk8s.sculptor.pojo.entity.SysSmsLoginLog">
+		<id column="id" property="id"/>
+
+		<result column="user_id" property="userId"/>
+		<result column="user_mobile_phone" property="userMobilePhone"/>
+		<result column="verification_code" property="verificationCode"/>
+		<result column="sms_provider_type_enum" property="smsProviderTypeEnum"/>
+		<result column="bool_service_state_enum" property="boolServiceStateEnum"/>
+		<result column="message_content" property="messageContent"/>
+		<result column="bool_use_enum" property="boolUseEnum"/>
+		<result column="ip_address" property="ipAddress"/>
+		<result column="user_agent" property="userAgent"/>
+		<result column="tenant_id" property="tenantId"/>
+		<result column="create_date" property="createDate"/>
+		<result column="create_user_id" property="createUserId"/>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+
+		id,
+		user_id,
+		user_mobile_phone,
+		verification_code,
+		sms_provider_type_enum,
+		bool_service_state_enum,
+		message_content,
+		bool_use_enum,
+		ip_address,
+		user_agent,
+		tenant_id,
+		create_date,
+		create_user_id
+	</sql>
+
+	<!--=====================================查询业务 start=====================================-->
+
+	<select id="selectById" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where id = #{id}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+
+	<select id="selectOneByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByUserId" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_id = #{userId}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUserIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserIdMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+	<select id="selectOneByUserMobilePhone" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserMobilePhoneMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_mobile_phone = #{userMobilePhone}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		limit 1
+	</select>
+
+	<select id="selectByUserMobilePhone" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserMobilePhoneMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_mobile_phone = #{userMobilePhone}
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByUserMobilePhoneList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserMobilePhoneMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where user_mobile_phone in
+		<foreach item="item" index="index" collection="userMobilePhoneList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+
+
+
+
+	<select id="selectByIdList" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.IdListMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+		order by create_date desc
+	</select>
+
+	<select id="selectByPageQueryMapperBo" resultMap="BaseResultMap" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogPageQueryMapperBO">
+		select
+		<include refid="Base_Column_List"/>
+		from sys_sms_login_log
+
+		<where>
+			<if test="id != null">
+				and id = #{id}
+			</if>
+			<if test="userId != null">
+				and user_id = #{userId}
+			</if>
+			<if test="userMobilePhone != null and userMobilePhone !=''">
+				and user_mobile_phone = #{userMobilePhone}
+			</if>
+			<if test="verificationCode != null and verificationCode !=''">
+				and verification_code = #{verificationCode}
+			</if>
+			<if test="smsProviderTypeEnum != null">
+				and sms_provider_type_enum = #{smsProviderTypeEnum}
+			</if>
+			<if test="boolServiceStateEnum != null">
+				and bool_service_state_enum = #{boolServiceStateEnum}
+			</if>
+			<if test="messageContent != null and messageContent !=''">
+				and message_content = #{messageContent}
+			</if>
+			<if test="boolUseEnum != null">
+				and bool_use_enum = #{boolUseEnum}
+			</if>
+			<if test="ipAddress != null and ipAddress !=''">
+				and ip_address = #{ipAddress}
+			</if>
+			<if test="userAgent != null and userAgent !=''">
+				and user_agent = #{userAgent}
+			</if>
+			<if test="tenantId != null">
+				and tenant_id = #{tenantId}
+			</if>
+			<if test="createUserId != null">
+				and create_user_id = #{createUserId}
+			</if>
+			<if test="createDateStartDate != null">
+				and create_date &gt;= #{createDateStartDate}
+			</if>
+			<if test="createDateEndDate != null">
+				and create_date &lt;= #{createDateEndDate}
+			</if>
+		</where>
+		<choose>
+			<when test="orderByList != null">
+				order by
+				<foreach item="item" index="index" collection="orderByList" open="" separator="," close="">
+					${item}
+				</foreach>
+			</when>
+			<otherwise>
+				order by create_date desc
+			</otherwise>
+		</choose>
+	</select>
+
+
+
+
+	<!--=====================================查询业务 end=====================================-->
+	<!--=====================================操作业务 start=====================================-->
+
+	<insert id="batchInsertList">
+		INSERT INTO sys_sms_login_log(
+
+		id,
+		user_id,
+		user_mobile_phone,
+		verification_code,
+		sms_provider_type_enum,
+		bool_service_state_enum,
+		message_content,
+		bool_use_enum,
+		ip_address,
+		user_agent,
+		tenant_id,
+		create_date,
+		create_user_id
+		)VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+
+			#{item.id},
+			#{item.userId},
+			#{item.userMobilePhone},
+			#{item.verificationCode},
+			#{item.smsProviderTypeEnum},
+			#{item.boolServiceStateEnum},
+			#{item.messageContent},
+			#{item.boolUseEnum},
+			#{item.ipAddress},
+			#{item.userAgent},
+			#{item.tenantId},
+			#{item.createDate},
+			#{item.createUserId}
+		)
+		</foreach>
+	</insert>
+
+
+	<delete id="deleteByIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.bases.BatchDeleteMapperBO">
+		DELETE FROM sys_sms_login_log
+		where id in
+		<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+	<delete id="deleteByUserIdList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserIdListToDeleteMapperBO">
+		DELETE FROM sys_sms_login_log
+		where user_id in
+		<foreach item="item" index="index" collection="userIdList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+	<delete id="deleteByUserMobilePhoneList" parameterType="com.cdk8s.sculptor.pojo.bo.mapper.syssmsloginlog.SysSmsLoginLogUserMobilePhoneListToDeleteMapperBO">
+		DELETE FROM sys_sms_login_log
+		where user_mobile_phone in
+		<foreach item="item" index="index" collection="userMobilePhoneList" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<if test="tenantId != null">
+			and tenant_id = #{tenantId}
+		</if>
+	</delete>
+
+
+	<!--=====================================操作业务 end=====================================-->
+
+</mapper>

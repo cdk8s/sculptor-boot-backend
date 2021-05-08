@@ -1,0 +1,130 @@
+/*
+ * Copyright © 2019-2021 CDK8S (cdk8s@qq.com)
+ * All rights reserved.
+ * 文件名称：RandomUtil.java
+ * 项目名称：sculptor-boot-common-util
+ * 项目描述：公共工具
+ * 版权说明：本软件属CDK8S所有
+ */
+
+package com.cdk8s.sculptor.util;
+
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.RandomUtils;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+/**
+ * 随机数工具类
+ */
+public final class RandomUtil {
+
+
+	//=====================================Apache Common 包 start=====================================
+
+	/**
+	 * 随机正整数
+	 *
+	 * @param startInclusive 包括，最小 0
+	 * @param endExclusive   不包括
+	 * @return
+	 */
+	public static int nextInt(final int startInclusive, final int endExclusive) {
+		return RandomUtils.nextInt(startInclusive, endExclusive);
+	}
+
+	public static int nextInt(final int endExclusive) {
+		return RandomUtils.nextInt(0, endExclusive);
+	}
+
+	/**
+	 * 随机正长整数
+	 *
+	 * @param startInclusive 包括，最小 0
+	 * @param endExclusive   不包括
+	 * @return
+	 */
+	public static long nextLong(final long startInclusive, final long endExclusive) {
+		return RandomUtils.nextLong(startInclusive, endExclusive);
+	}
+
+	/**
+	 * 随机正双精度浮点数（默认精度 2，四舍五入）
+	 *
+	 * @param startInclusive 包括，最小 0.00
+	 * @param endExclusive   不包括
+	 * @return
+	 */
+	public static double nextDouble(final double startInclusive, final double endExclusive) {
+		return nextDouble(startInclusive, endExclusive, 2);
+	}
+
+	public static BigDecimal nextBigDecimal(final double startInclusive, final double endExclusive) {
+		BigDecimal result = new BigDecimal(nextDouble(startInclusive, endExclusive));
+		return result.setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+
+	/**
+	 * 随机正双精度浮点数（默认精度 2，四舍五入）
+	 *
+	 * @param startInclusive 包括，最小 0.00
+	 * @param endExclusive   不包括
+	 * @param scale          精度
+	 * @return
+	 */
+	public static double nextDouble(final double startInclusive, final double endExclusive, Integer scale) {
+		if (null == scale) {
+			scale = 2;
+		}
+		double nextDouble = RandomUtils.nextDouble(startInclusive, endExclusive);
+		return new BigDecimal(nextDouble).setScale(scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+	/**
+	 * 随机字符串，包含大小写字母和数字
+	 *
+	 * @param count
+	 * @return
+	 */
+	public static String randomAlphanumeric(final int count) {
+		return RandomStringUtils.randomAlphanumeric(count);
+	}
+
+	/**
+	 * 随机数字字符串
+	 *
+	 * @param count
+	 * @return
+	 */
+	public static String randomNumeric(final int count) {
+		return RandomStringUtils.randomNumeric(count);
+	}
+
+	/**
+	 * 随机字母字符串，包含大小写
+	 *
+	 * @param count
+	 * @return
+	 */
+	public static String randomAlphabetic(final int count) {
+		return RandomStringUtils.randomAlphabetic(count);
+	}
+
+
+	//=====================================Apache Common 包  end=====================================
+
+	//=====================================其他包 start=====================================
+
+
+	//=====================================其他包  end=====================================
+
+
+	//=====================================私有方法 start=====================================
+
+	//=====================================私有方法  end=====================================
+
+}
+
+
+

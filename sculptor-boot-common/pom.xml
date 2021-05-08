@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.cdk8s.sculptor</groupId>
+		<artifactId>sculptor-boot-backend</artifactId>
+		<version>2.1.90-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>sculptor-boot-common</artifactId>
+	<packaging>pom</packaging>
+
+	<description>公共模块</description>
+
+	<modules>
+		<module>sculptor-boot-common-util</module>
+		<module>sculptor-boot-common-spring</module>
+		<module>sculptor-boot-common-redis</module>
+		<module>sculptor-boot-common-okhttp</module>
+		<module>sculptor-boot-common-ip</module>
+		<module>sculptor-boot-common-exception</module>
+		<module>sculptor-boot-common-properties</module>
+		<module>sculptor-boot-common-enum</module>
+		<module>sculptor-boot-common-constant</module>
+		<module>sculptor-boot-common-validator</module>
+	</modules>
+</project>
