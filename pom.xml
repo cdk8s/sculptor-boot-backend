@@ -49,7 +49,7 @@
     <java.version>1.8</java.version>
 
     <!--依赖 start-->
-    <spring-boot.version>2.2.10.RELEASE</spring-boot.version>
+    <spring-boot.version>2.5.12</spring-boot.version>
     <tkey-sso-client-starter-rest.version>1.0.7</tkey-sso-client-starter-rest.version>
     <lombok.version>1.18.12</lombok.version>
 
