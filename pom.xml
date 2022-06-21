@@ -74,7 +74,7 @@
     <commons-pool2.version>2.6.2</commons-pool2.version>
 
     <h2.version>1.4.200</h2.version>
-    <mysql-connector-java.version>8.0.20</mysql-connector-java.version>
+    <mysql-connector-java.version>8.0.28</mysql-connector-java.version>
     <postgresql.version>42.2.10</postgresql.version>
     <hutool-all.version>5.5.8</hutool-all.version>
     <guava.version>29.0-jre</guava.version>
